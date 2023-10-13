@@ -3,7 +3,7 @@ import microbserv from '../../public/dashboard.jpg';
 const people = [
   {
     name: 'MicrObserv',
-    role: 'Software Engineer',
+    Description: 'Software Engineer',
     imageUrl: microbserv,
 
     twitterUrl: '#',
