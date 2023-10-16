@@ -1,10 +1,7 @@
 import { expect, test } from 'vitest';
 import { render } from '@testing-library/react';
-import TechStack from '@/components/TechStack';
-
+import TechStack from '../components/TechStack';
 
 test('Display Tech Images', () => {
-    const  techStack = render(<TechStack />);
-
-    
+  const techStack = render(<TechStack />);
 });

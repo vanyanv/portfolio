@@ -1,48 +1,6 @@
 import Image from 'next/image';
-import microbserv from '../../public/dashboard.jpg';
-const people = [
-  {
-    name: 'MicrObserv',
-    Description: 'Software Engineer',
-    imageUrl: microbserv,
-
-    twitterUrl: '#',
-    linkedinUrl: '#',
-    react: '#',
-    electron: '#',
-  },
-  {
-    name: 'MicrObserv',
-    role: 'Software Engineer',
-    imageUrl: microbserv,
-
-    twitterUrl: '#',
-    linkedinUrl: '#',
-    react: '#',
-    electron: '#',
-  },
-  {
-    name: 'MicrObserv',
-    role: 'Software Engineer',
-    imageUrl: microbserv,
-
-    twitterUrl: '#',
-    linkedinUrl: '#',
-    react: '#',
-    electron: '#',
-  },
-  {
-    name: 'MicrObserv',
-    role: 'Software Engineer',
-    imageUrl: microbserv,
-
-    twitterUrl: '#',
-    linkedinUrl: '#',
-    react: '#',
-    electron: '#',
-  },
-  // More people...
-];
+import { Project } from '../types';
+import projects from '../data';
 
 export default function Projects() {
   return (
@@ -57,21 +15,25 @@ export default function Projects() {
           role='list'
           className='mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3'
         >
-          {people.map((person) => (
-            <li key={person.name}>
+          {projects.map((project: Project) => (
+            <li key={project.name}>
               <Image
                 className='aspect-[3/2] w-full rounded-2xl object-cover'
-                src={person.imageUrl}
+                src={project.imageUrl.src}
                 alt=''
+                width={project.imageUrl.width}
+                height={project.imageUrl.height}
               />
               <h3 className='mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900'>
-                {person.name}
+                {project.name}
               </h3>
-              <p className='text-base leading-7 text-gray-600'>{person.role}</p>
+              <p className='text-base leading-7 text-gray-600'>
+                {project.description}
+              </p>
               <ul role='list' className='mt-6 flex gap-x-6'>
                 <li>
                   <a
-                    href={person.twitterUrl}
+                    href={project.twitterUrl}
                     className='text-gray-400 hover:text-gray-500'
                   >
                     <span className='sr-only'>Twitter</span>
@@ -87,7 +49,7 @@ export default function Projects() {
                 </li>
                 <li>
                   <a
-                    href={person.linkedinUrl}
+                    href={project.linkedinUrl}
                     className='text-gray-400 hover:text-gray-500'
                   >
                     <span className='sr-only'>LinkedIn</span>
