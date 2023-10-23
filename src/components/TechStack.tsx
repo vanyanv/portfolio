@@ -2,8 +2,17 @@ import Image from 'next/image';
 const stats = [
   { id: 1, name: 'HTML', value: `/Icons/HTML.svg` },
   { id: 2, name: 'CSS', value: '/Icons/CSS.svg' },
-  { id: 3, name: 'Javascript', value: '/Icons/Javascript.svg' },
-  { id: 4, name: 'Typescript', value: '/Icons/Typescript.svg' },
+  {
+    id: 3,
+    name: 'Javascript',
+    value:
+      'https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg',
+  },
+  {
+    id: 4,
+    name: 'Typescript',
+    value: 'https://upload.wikimedia.org/wikipedia/commons/f/f5/Typescript.svg',
+  },
   { id: 4, name: 'React', value: '/Icons/React.svg' },
   { id: 5, name: 'Redux', value: '/Icons/Redux.svg' },
   { id: 6, name: 'Nextjs', value: '/Icons/Nextjs.svg' },
