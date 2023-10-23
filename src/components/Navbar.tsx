@@ -5,10 +5,15 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
   { name: 'About', href: '#' },
-  { name: 'Projects', href: '#' },
-  { name: 'Github', href: '#' },
-  { name: 'LinkedIn', href: '#' },
-  { name: 'Resume', href: '#' },
+  { name: 'Tech', href: '#technologies' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Github', href: 'https://github.com/vanyanv' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/vardanvanyan/' },
+  {
+    name: 'Resume',
+    href: 'Resume/Vardan_Vanyan_Resume.pdf',
+    pdf: 'Vardan_Vanyan_Resume.pdf',
+  },
 ];
 
 export default function Navbar() {
@@ -40,6 +45,7 @@ export default function Navbar() {
               <a
                 key={item.name}
                 href={item.href}
+                download={item.pdf}
                 className='text-sm font-semibold leading-6 text-gray-900 hover:animate-bounce'
               >
                 {item.name}
@@ -58,7 +64,7 @@ export default function Navbar() {
           <Dialog.Panel className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
             <div className='flex items-center justify-between'>
               <a href='#' className='-m-1.5 p-1.5'>
-                <span className='sr-only'>Your Company</span>
+                <span className='sr-only'>Vardan</span>
               </a>
               <button
                 type='button'

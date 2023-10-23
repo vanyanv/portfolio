@@ -7,11 +7,11 @@ const projectData: Project[] = projects;
 
 export default function Projects() {
   return (
-    <div className='bg-white py-24 sm:py-32'>
-      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        <div className='mx-auto max-w-2xl lg:mx-0'>
+    <div id='projects' className='bg-white py-24 sm:py-32 h-screen'>
+      <div className=' mx-auto max-w-7xl px-6 lg:px-8 pb-8 '>
+        <div className=' flex justify-center text-center'>
           <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-            Projects
+            {'<Projects/>'}
           </h2>
         </div>
         <ul

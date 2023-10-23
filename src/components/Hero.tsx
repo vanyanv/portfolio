@@ -25,15 +25,16 @@ export default function Hero() {
               Vardan Vanyan
             </h1>
             <h2 className='text-xl mt-4 font-bold leading-8 text-gray-600'>
-              Software Engineer
+              Software Engineer, Front End & App Developer
             </h2>
             <h2 className='mt-8 text-m leading-8 text-gray-600'>
-              I am a software engineer passionate about Front-end development,
-              based In Los Angeles📍
+              I am a software engineer passionate about Front-end development
+              based In Los Angeles📍 When I am not coding, I enjoy playing
+              tennis 🎾, cycling 🚴‍♂️, and trying new food 🍣.
             </h2>
           </div>
         </div>
-        {/* this is for background polygons */}
+        {/* below is for background polygons */}
         <div
           className='absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]'
           aria-hidden='true'

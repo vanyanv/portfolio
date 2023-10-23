@@ -3,7 +3,17 @@ import microbserv from '../public/dashboard.jpg';
 const Projects = [
   {
     name: 'MicrObserv',
-    description: 'Observability for Microservices',
+    description: 'Open Source Observability Tool for Microservices',
+    imageUrl: microbserv,
+
+    twitterUrl: '#',
+    linkedinUrl: '#',
+    react: '#',
+    electron: '#',
+  },
+  {
+    name: 'Modern Pokedex',
+    description: 'A Minimalistic and Modern Pokedex',
     imageUrl: microbserv,
 
     twitterUrl: '#',
@@ -13,7 +23,7 @@ const Projects = [
   },
   {
     name: 'Whatsnext',
-    description: 'Observability for Microservices',
+    description: 'Minimalistic Daily Mood Journal and Goals Tracker',
     imageUrl: microbserv,
 
     twitterUrl: '#',
@@ -22,18 +32,8 @@ const Projects = [
     electron: '#',
   },
   {
-    name: 'MicrObserv',
-    description: 'Observability for Microservices',
-    imageUrl: microbserv,
-
-    twitterUrl: '#',
-    linkedinUrl: '#',
-    react: '#',
-    electron: '#',
-  },
-  {
-    name: 'MicrObserv',
-    description: 'Observability for Microservices',
+    name: 'Stuff Library',
+    description: 'Marketplace for loaning and renting stuff',
     imageUrl: microbserv,
 
     twitterUrl: '#',

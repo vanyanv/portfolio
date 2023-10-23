@@ -16,15 +16,15 @@ const stats = [
 
 export default function TechStack() {
   return (
-    <div className=' py-24 sm:py-32'>
-      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
+    <div id='technologies' className='py-24 sm:py-32 h-screen'>
+      <div className='mx-auto max-w-7xl px-6 lg:px-8 '>
         <div className='mx-auto max-w-2xl lg:max-w-none'>
           <div className='text-center'>
             <h2 className='text-xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-              Tech Stack
+              {'<Technologies/>'}
             </h2>
           </div>
-          <dl className='mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4'>
+          <dl className='mt-16 grid grid-cols-2 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4'>
             {stats.map((stat) => (
               <div
                 key={stat.id}
