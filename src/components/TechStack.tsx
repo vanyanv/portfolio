@@ -25,7 +25,7 @@ const stats = [
 
 export default function TechStack() {
   return (
-    <div id='technologies' className='py-24 sm:py-32 h-screen'>
+    <div id='technologies' className='py-24 sm:py-32 min-h-screen'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8 '>
         <div className='mx-auto max-w-2xl lg:max-w-none'>
           <div className='text-center'>
