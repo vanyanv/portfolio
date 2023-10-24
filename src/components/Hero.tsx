@@ -1,11 +1,12 @@
 'use client';
-import Image from 'next/image';
 import Navbar from './Navbar';
+import Reveal from './Reveal';
 
 export default function Hero() {
   return (
     <div className='bg-white h-screen'>
       <Navbar />
+
       <div className='relative isolate px-6 pt-14 lg:px-8'>
         <div
           className='absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'
@@ -20,27 +21,32 @@ export default function Hero() {
           />
         </div>
         <div className='mx-auto max-w-2xl py-32 sm:py-48 lg:py-56'>
-          <div className='hidden sm:mb-8 sm:flex sm:justify-center'></div>
-          <div className='text-center'>
-            <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-7xl'>
-              Hi, Im Vardan
-            </h1>
-            <h2 className='text-xl mt-4 font-bold leading-8 text-gray-600'>
-              Software Engineer
-            </h2>
-            <h2 className='mt-8 text-m leading-8 text-gray-600 m:text-xs s:text-xs'>
-              I really love making awesome products, especially when it comes to
-              Front-end development. I'm a self-taught developer, and creating
-              beautiful UIs is my thing.
-            </h2>
-            <h2 className='mt-0 text-m leading-8 text-gray-600'>
-              When I am not coding, I enjoy playing tennis 🎾, cycling 🚴‍♂️, and
-              trying new food 🍣.
-            </h2>
-            <h2 className='mt-0 text-m leading-8 text-gray-600'>
-              I am based In Los Angeles📍
-            </h2>
-          </div>
+          <Reveal>
+            <div className='text-center'>
+              <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-7xl'>
+                Hi, Im Vardan
+              </h1>
+
+              <h2 className='text-xl mt-4 font-bold leading-8 text-gray-600'>
+                Software Engineer
+              </h2>
+
+              <h2 className='mt-8 text-m leading-8 text-gray-600 m:text-xs s:text-xs'>
+                I really love making awesome products, especially when it comes
+                to Front-end development. I'm a self-taught developer, and
+                creating beautiful UIs is my thing.
+              </h2>
+
+              <h2 className='mt-0 text-m leading-8 text-gray-600'>
+                When I am not coding, I enjoy playing tennis 🎾, cycling 🚴‍♂️, and
+                trying new food 🍣.
+              </h2>
+
+              <h2 className='mt-0 text-m leading-8 text-gray-600'>
+                I am based In Los Angeles📍
+              </h2>
+            </div>
+          </Reveal>
         </div>
         {/* below is for background polygons */}
         <div

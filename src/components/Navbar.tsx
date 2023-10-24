@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Reveal from './Reveal';
 
 const navigation = [
   { name: 'About', href: '#' },
@@ -40,6 +41,7 @@ export default function Navbar() {
               <Bars3Icon className='h-6 w-6' aria-hidden='true' />
             </button>
           </div>
+
           <div className='hidden lg:flex lg:gap-x-12'>
             {navigation.map((item) => (
               <a
@@ -52,8 +54,10 @@ export default function Navbar() {
               </a>
             ))}
           </div>
+
           <div className='hidden lg:flex lg:flex-1 lg:justify-end'></div>
         </nav>
+
         <Dialog
           as='div'
           className='lg:hidden'
