@@ -33,7 +33,7 @@ export default function Reveal({
         }}
         initial='hidden'
         animate={mainControls}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        transition={{ duration: 1.5, delay: 0.1 }}
       >
         {children}
       </motion.div>
