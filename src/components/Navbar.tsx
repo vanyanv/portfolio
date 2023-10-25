@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
@@ -21,7 +22,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <>
-      <header className='absolute inset-x-0 top-0 z-50'>
+      <header className='absolute inset-x-0 top-0 z-50 '>
         <nav
           className='flex items-center justify-between p-6 lg:px-8'
           aria-label='Global'

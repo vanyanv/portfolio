@@ -1,8 +1,9 @@
-import microbserv from '/public/Projects/dashboard.jpg';
-import modernPokedex from '/public/Projects/Modern_Pokedex.png';
-import whatsnext from '/public/Projects/Whatsnext.jpeg';
-import microbservWebsite from '/public/Projects/MicrObserv_Website.png';
-import stuffLibrary from '/public/Projects/Stuff_Library.png';
+import microbserv from '../public/Images/dashboard.jpg';
+import pokedex from '../public/Images/Pokedex.png';
+import whatsnext from '../public/Images//Whatsnext.jpeg';
+import stufflibrary from '../public/Images//StuffLibrary.png';
+import website from '../public/Images//MicrObserv.png';
+
 const Projects = [
   {
     name: 'MicrObserv',
@@ -24,7 +25,7 @@ const Projects = [
   {
     name: 'Modern Pokedex',
     description: 'A Minimalistic and Modern Pokedex',
-    imageUrl: modernPokedex,
+    imageUrl: pokedex,
 
     githubUrl: 'https://github.com/vanyanv/Modern-Pokedex',
     linkUrl: 'https://modernpokedex.vercel.app/',
@@ -42,7 +43,7 @@ const Projects = [
   {
     name: 'Microbserv Website',
     description: 'Website for MicrObserv',
-    imageUrl: microbservWebsite,
+    imageUrl: website,
 
     githubUrl: 'https://github.com/vanyanv/MicrObserv',
     linkUrl: 'https://micr-observ-website.vercel.app/',
@@ -51,7 +52,7 @@ const Projects = [
   {
     name: 'Stuff Library',
     description: 'Marketplace for loaning and renting stuff',
-    imageUrl: stuffLibrary,
+    imageUrl: stufflibrary,
 
     githubUrl: 'https://github.com/Stuff-Library/Stuff-Library',
     linkUrl: 'https://github.com/Stuff-Library/Stuff-Library',

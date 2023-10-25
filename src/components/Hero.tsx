@@ -5,7 +5,7 @@ import Reveal from './Reveal';
 export default function Hero() {
   return (
     <div className='bg-white h-screen'>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className='relative isolate px-6 pt-14 lg:px-8'>
         <div
