@@ -6,9 +6,9 @@ interface MiniTechStackProps {
 }
 
 const javascriptORTypescript = (tech: string) => {
-  if (tech === 'JavaScript') {
+  if (tech === 'Javascript') {
     return 'https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg';
-  } else if (tech === 'TypeScript') {
+  } else if (tech === 'Typescript') {
     return 'https://upload.wikimedia.org/wikipedia/commons/f/f5/Typescript.svg';
   } else {
     return `/Icons/${tech}.svg`;
