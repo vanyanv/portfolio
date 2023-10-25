@@ -6,7 +6,7 @@ import stufflibrary from '../public/Images/StuffLibrary.png';
 const Projects = [
   {
     name: 'MicrObserv',
-    description: 'Open Source Observability Tool for Microservices',
+    description: 'Observability Tool for Microservices',
     imageUrl: microbserv,
 
     githubUrl: 'https://github.com/vanyanv/MicrObserv',
@@ -32,7 +32,7 @@ const Projects = [
   },
   {
     name: 'Whatsnext',
-    description: 'Minimalistic Daily Mood Journal and Goals Tracker',
+    description: 'Daily Mood Journal and Goals Tracker',
     imageUrl: whatsnext,
 
     githubUrl: 'https://github.com/InnoLVKB/whatsnext',
@@ -40,8 +40,8 @@ const Projects = [
     tech: ['React', 'Javascript', 'Nextjs', 'Node', 'Postgres', 'Tailwindcss'],
   },
   {
-    name: 'Microbserv Website',
-    description: 'Website for MicrObserv',
+    name: 'Product Website',
+    description: 'Product Page for MicrObserv',
     imageUrl: microbserv,
 
     githubUrl: 'https://github.com/vanyanv/MicrObserv',

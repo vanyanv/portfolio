@@ -25,7 +25,7 @@ export default function Projects() {
             <Reveal key={project.name}>
               <li
                 key={project.name}
-                className='bg-gray-400/5 rounded-2xl p-2.5'
+                className='bg-gray-400/5 rounded-2xl p-6'
               >
                 <Image
                   className='aspect-[3/2] w-full rounded-2xl object-fit'
