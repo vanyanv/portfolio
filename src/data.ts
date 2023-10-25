@@ -1,8 +1,7 @@
 import microbserv from '../public/Images/dashboard.jpg';
 import pokedex from '../public/Images/Pokedex.png';
-import whatsnext from '../public/Images//Whatsnext.jpeg';
-import stufflibrary from '../public/Images//StuffLibrary.png';
-import website from '../public/Images//MicrObserv.png';
+import whatsnext from '../public/Images/Whatsnext.jpeg';
+import stufflibrary from '../public/Images/StuffLibrary.png';
 
 const Projects = [
   {
@@ -43,7 +42,7 @@ const Projects = [
   {
     name: 'Microbserv Website',
     description: 'Website for MicrObserv',
-    imageUrl: website,
+    imageUrl: microbserv,
 
     githubUrl: 'https://github.com/vanyanv/MicrObserv',
     linkUrl: 'https://micr-observ-website.vercel.app/',
