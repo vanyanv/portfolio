@@ -19,11 +19,14 @@ export default function Projects() {
         </div>
         <ul
           role='list'
-          className='mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-3'
+          className=' mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-3'
         >
           {projectData.map((project: Project) => (
             <Reveal key={project.name}>
-              <li key={project.name}>
+              <li
+                key={project.name}
+                className='bg-gray-400/5 rounded-2xl p-2.5'
+              >
                 <Image
                   className='aspect-[3/2] w-full rounded-2xl object-fit'
                   src={project.imageUrl.src}
@@ -38,7 +41,7 @@ export default function Projects() {
                   {project.description}
                 </p>
                 {/* displays tech stack used in project */}
-                <MiniTechStack techs={project.tech}/>
+                <MiniTechStack techs={project.tech} />
                 <ul role='list' className='mt-6 flex gap-x-6'>
                   <li>
                     <a href={project.githubUrl}>

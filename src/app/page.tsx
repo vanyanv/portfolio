@@ -1,7 +1,7 @@
 import Hero from '@/components/Hero';
 import Navbar from '@/components/Navbar';
 import Projects from '@/components/Projects';
-import ScrollToTop from '@/components/ScrollToTop';
+import ScrollToTopButton from '@/components/ScrollToTopButton';
 import TechStack from '@/components/TechStack';
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
       <Hero />
       <TechStack />
       <Projects />
-      <ScrollToTop />
+      <ScrollToTopButton />
     </>
   );
 }
