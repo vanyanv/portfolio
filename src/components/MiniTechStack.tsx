@@ -5,6 +5,15 @@ interface MiniTechStackProps {
   techs: string[];
 }
 
+const javascriptORTypescript = (tech: string) => {
+  if (tech === 'JavaScript') {
+    return 'https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg';
+  } else if (tech === 'TypeScript') {
+    return 'https://upload.wikimedia.org/wikipedia/commons/f/f5/Typescript.svg';
+  } else {
+    return `/Icons/${tech}.svg`;
+  }
+};
 export default function MiniTechStack({ techs }: MiniTechStackProps) {
   return (
     <>
@@ -13,7 +22,7 @@ export default function MiniTechStack({ techs }: MiniTechStackProps) {
           <Image
             key={tech}
             className='col-span-2 max-h-6 w-full object-contain lg:col-span-1'
-            src={`/Icons/${tech}.svg`}
+            src={javascriptORTypescript(tech)}
             alt={tech}
             width={5}
             height={5}
