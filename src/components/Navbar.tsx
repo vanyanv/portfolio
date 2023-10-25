@@ -2,8 +2,11 @@
 import React from 'react';
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import Reveal from './Reveal';
+import {
+  ArrowDownCircleIcon,
+  Bars3Icon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline';
 
 const navigation = [
   { name: 'About', href: '#' },
@@ -18,6 +21,9 @@ const navigation = [
   },
 ];
 
+const resumeDownload = (item: { pdf: string }) => {
+  window.open(item.pdf);
+};
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
