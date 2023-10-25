@@ -24,7 +24,7 @@ export default function Hero() {
           <Reveal>
             <div className='text-center'>
               <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-7xl'>
-                Hi, Im Vardan
+                Hi, I&rsquo;m Vardan
               </h1>
 
               <h2 className='text-xl mt-4 font-bold leading-8 text-gray-600'>
@@ -33,11 +33,11 @@ export default function Hero() {
 
               <h2 className='mt-8 text-m leading-8 text-gray-600 m:text-xs s:text-xs'>
                 I really love making awesome products, especially when it comes
-                  to Front-end development. I&apos;m a self-taught developer, and
-                  creating beautiful UIs is my thing.
-                </h2>
+                to Front-end development. I&apos;m a self-taught developer, and
+                creating beautiful UIs is my thing.
+              </h2>
 
-                <h2 className='mt-0 text-m leading-8 text-gray-600'>
+              <h2 className='mt-0 text-m leading-8 text-gray-600'>
                 When I am not coding, I enjoy playing tennis 🎾, cycling 🚴‍♂️, and
                 trying new food 🍣.
               </h2>

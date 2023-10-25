@@ -14,8 +14,9 @@ export default function Reveal({
   width = 'fit-content',
   className,
 }: Props) {
-  const [ref, inView, entry] = useInView({ threshold: 0.1 });
+  const [ref, inView] = useInView({ threshold: 0.1 });
   const mainControls = useAnimation();
+
   useEffect(() => {
     if (inView) {
       mainControls.start('visible');

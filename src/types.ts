@@ -4,8 +4,7 @@ export type Project = {
   name: string;
   description: string;
   imageUrl: StaticImageData;
-  twitterUrl: string;
-  linkedinUrl: string;
-  react: string;
-  electron: string;
+  githubUrl: string;
+  linkUrl: string;
+  tech: string[];
 };
