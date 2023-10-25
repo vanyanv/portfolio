@@ -13,11 +13,12 @@ const navigation = [
   { name: 'Tech', href: '#technologies' },
   { name: 'Projects', href: '#projects' },
   { name: 'Github', href: 'https://github.com/vanyanv' },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/vardanvanyan/' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/vardanvanyan/', key: 'linkedin' },
   {
     name: 'Resume',
     href: 'Resume/Vardan_Vanyan_Resume.pdf',
     pdf: 'Vardan_Vanyan_Resume.pdf',
+    key: 'resume'
   },
 ];
 
@@ -25,12 +26,13 @@ const resumeDownloadIcon = (item: {
   name: string;
   href: string;
   pdf?: string;
+  key?: string;
 }) => {
   if (item.name === 'Resume') {
     return (
       <>
         <a
-          key={item.name}
+          key={item.key}
           href={item.href}
           download={item.pdf}
           className='flex gap-1 text-sm font-semibold leading-6 text-gray-900 hover:animate-bounce hover:text-indigo-500'
@@ -43,7 +45,7 @@ const resumeDownloadIcon = (item: {
   } else {
     return (
       <a
-        key={item.name}
+        key={item.key || item.name}
         href={item.href}
         download={item.pdf}
         className='text-sm font-semibold leading-6 text-gray-900 hover:animate-bounce  hover:text-indigo-500'

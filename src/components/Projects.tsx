@@ -41,8 +41,11 @@ export default function Projects() {
                   {project.description}
                 </p>
                 {/* displays tech stack used in project */}
+
                 <MiniTechStack techs={project.tech} />
-                <ul role='list' className='mt-6 flex gap-x-6'>
+
+                <ul role='list' className='mt-6 flex gap-x-3'>
+                  <p className='font-semibold text-gray-600'>Links:</p>
                   <li>
                     <a href={project.githubUrl}>
                       <span className='sr-only'>GitHub</span>
