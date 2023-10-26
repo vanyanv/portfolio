@@ -16,7 +16,7 @@ export default function ContactMe() {
                 I would love to chat and connects, Lets Talk!
               </h2>
             </div>
-            <div className='mt-9 flex items-end gap-5'>
+            <div className='mt-9 flex flex-col items-end gap-5 sm:flex-row'>
               <div className='flex'>
                 <div className='flex-shrink-0'>
                   <Image
