@@ -2,7 +2,7 @@ import microbserv from '../public/Images/dashboard.jpg';
 import pokedex from '../public/Images/Pokedex.png';
 import whatsnext from '../public/Images/Whatsnext.jpeg';
 import stufflibrary from '../public/Images/StuffLibrary.png';
-import microbservWebpage from '../public/Images/MicrObservWebpage.png';
+import microbservWebpage from '../public/Images/Webpage.png';
 
 const Projects = [
   {
