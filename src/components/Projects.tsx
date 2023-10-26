@@ -23,14 +23,11 @@ export default function Projects() {
         >
           {projectData.map((project: Project) => (
             <Reveal key={project.name}>
-              <li
-                key={project.name}
-                className='bg-gray-400/5 rounded-2xl p-6'
-              >
+              <li key={project.name} className='bg-gray-400/5 rounded-2xl p-6'>
                 <Image
                   className='aspect-[3/2] w-full rounded-2xl object-fit'
                   src={project.imageUrl.src}
-                  alt=''
+                  alt={project.name}
                   width={project.imageUrl.width}
                   height={project.imageUrl.height}
                 />
