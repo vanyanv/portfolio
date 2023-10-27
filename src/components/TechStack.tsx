@@ -30,11 +30,14 @@ const techStack = [
 
 export default function TechStack() {
   return (
-    <div id='technologies' className='py-24 sm:py-32 min-h-screen'>
+    <div
+      id='technologies'
+      className='py-24 sm:py-32 min-h-screen dark:bg-black'
+    >
       <div className='mx-auto max-w-7xl px-6 lg:px-8 '>
         <div className='mx-auto  max-w-2xl lg:max-w-none'>
           <div className='text-center'>
-            <h2 className='text-xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+            <h2 className='text-xl font-bold tracking-tight text-gray-900 dark:text-gray-300 sm:text-4xl'>
               {'<Technologies/>'}
             </h2>
           </div>
@@ -44,13 +47,13 @@ export default function TechStack() {
               <Reveal key={tech.id}>
                 <div
                   key={tech.id}
-                  className='flex flex-col items-center bg-gray-400/5 p-8 hover:bg-gray-400/10 transition duration-300 ease-in-out rounded-2xl'
+                  className='flex flex-col items-center bg-gray-400/5 dark:bg-gray-400/10 p-8 hover:bg-gray-400/10 dark:hover:bg-gray-400/20 transition duration-300 ease-in-out rounded-2xl'
                 >
-                  <dt className='text-sm font-semibold leading-6 text-gray-600'>
+                  <dt className='text-sm font-semibold leading-6 text-gray-600 dark:text-gray-300'>
                     {tech.name}
                   </dt>
                   <Image
-                    className='order-first text-3xl font-semibold tracking-tight text-gray-900'
+                    className='order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-300'
                     src={tech.value}
                     alt={tech.name}
                     width={50}

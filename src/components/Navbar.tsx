@@ -13,12 +13,16 @@ const navigation = [
   { name: 'Tech', href: '#technologies' },
   { name: 'Projects', href: '#projects' },
   { name: 'Github', href: 'https://github.com/vanyanv' },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/vardanvanyan/', key: 'linkedin' },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/vardanvanyan/',
+    key: 'linkedin',
+  },
   {
     name: 'Resume',
     href: 'Resume/Vardan_Vanyan_Resume.pdf',
     pdf: 'Vardan_Vanyan_Resume.pdf',
-    key: 'resume'
+    key: 'resume',
   },
 ];
 
@@ -35,7 +39,7 @@ const resumeDownloadIcon = (item: {
           key={item.key}
           href={item.href}
           download={item.pdf}
-          className='flex gap-1 text-sm font-semibold leading-6 text-gray-900 hover:animate-bounce hover:text-indigo-500'
+          className='flex gap-1 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300 hover:animate-bounce hover:text-indigo-500 dark:hover:text-indigo-500'
         >
           <ArrowDownCircleIcon className='-mr-0.5 h-6 w-6' aria-hidden='true' />
           {item.name}
@@ -48,7 +52,7 @@ const resumeDownloadIcon = (item: {
         key={item.key || item.name}
         href={item.href}
         download={item.pdf}
-        className='text-sm font-semibold leading-6 text-gray-900 hover:animate-bounce  hover:text-indigo-500'
+        className='text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300 hover:animate-bounce  hover:text-indigo-500 dark:hover:text-indigo-500'
       >
         {item.name}
       </a>
