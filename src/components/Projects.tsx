@@ -10,10 +10,13 @@ const projectData: Project[] = projects;
 
 export default function Projects() {
   return (
-    <div id='projects' className='bg-white py-2 sm:py-20 min-h-screen dark:bg-black'>
+    <div
+      id='projects'
+      className='bg-white py-2 sm:py-20 min-h-screen dark:bg-black'
+    >
       <div className=' mx-auto max-w-7xl px-6 lg:px-8 pb-8 '>
         <div className=' flex justify-center text-center'>
-          <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+          <h2 className='text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl'>
             {'<Projects/>'}
           </h2>
         </div>
@@ -23,7 +26,10 @@ export default function Projects() {
         >
           {projectData.map((project: Project) => (
             <Reveal key={project.name}>
-              <li key={project.name} className='bg-gray-400/5 rounded-2xl p-6'>
+              <li
+                key={project.name}
+                className='bg-gray-400/5 dark:bg-gray-400/20 rounded-2xl p-6'
+              >
                 <Image
                   className='aspect-[3/2] w-full rounded-2xl object-fit'
                   src={project.imageUrl.src}
@@ -31,10 +37,10 @@ export default function Projects() {
                   width={project.imageUrl.width}
                   height={project.imageUrl.height}
                 />
-                <h3 className='mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900'>
+                <h3 className='mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900 dark:text-gray-200'>
                   {project.name}
                 </h3>
-                <p className='text-base leading-7 text-gray-600'>
+                <p className='text-base leading-7 text-gray-600 dark:text-gray-400'>
                   {project.description}
                 </p>
                 {/* displays tech stack used in project */}
@@ -42,11 +48,14 @@ export default function Projects() {
                 <MiniTechStack techs={project.tech} />
 
                 <ul role='list' className='mt-6 flex gap-x-3'>
-                  <p className='font-semibold text-gray-600'>Links:</p>
+                  <p className='font-semibold text-gray-600 dark:text-gray-400'>
+                    Links:
+                  </p>
                   <li>
                     <a href={project.githubUrl}>
                       <span className='sr-only'>GitHub</span>
                       <Image
+                        className='dark:invert hover:animate-spin'
                         src={githubIcon}
                         alt={'GitHub Icon'}
                         width={25}
@@ -58,7 +67,7 @@ export default function Projects() {
                     <a href={project.linkUrl}>
                       <span className='sr-only'>Link</span>
                       <Image
-                        className='hover:animate-spin '
+                        className='hover:animate-spin  '
                         src={chromeIcon}
                         alt={'website link'}
                         width={25}
