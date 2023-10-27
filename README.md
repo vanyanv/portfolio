@@ -10,7 +10,7 @@ Welcome to the repository of my personal portfolio website, [vardanvanyan.com](h
 - **Tailwind CSS**: A utility-first CSS framework for efficient web page design.
 - **Framer Motion**: A library for creating elegant and smooth animations.
 - **Vitest**: Used for creating comprehensive tests for frontend components.
-- **Vercel**: Utilized for continuous integration and deployment, automating website deployment to GitHub Pages on each code push.
+- **Vercel**: Utilized for continuous integration and deployment, automating website deployment to Vercel on each code push.
 
 ## Setup
 
