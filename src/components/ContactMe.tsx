@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function ContactMe() {
   return (
-    <div className='bg-white dark:black'>
+    <div className='bg-white dark:bg-black'>
       <div className='mx-auto max-w-7xl px-6 py-16 lg:px-8'>
         <div className='mx-auto max-w-lg'>
           <div className='mt-12 sm:mt-16 md:mt-0 flex flex-col justify-center items-center'>
