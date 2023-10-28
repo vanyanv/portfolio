@@ -21,7 +21,7 @@ export default function ContactMe() {
                 <div className='flex-shrink-0'>
                   <Image
                     src={'/Icons/Github.svg'}
-                    className='h-6 w-6 text-gray-400 dark:text-gray-200'
+                    className='h-6 w-6 text-gray-400 dark:text-gray-200 dark:invert'
                     aria-hidden='true'
                     alt='github icon'
                     height={6}
