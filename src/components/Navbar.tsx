@@ -8,7 +8,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { v4 as uuidv4 } from 'uuid';
-import { DarkModeToggle } from 'react-dark-mode-toggle-2';
+import { DarkModeToggle } from 'react-dark-mode-toggle-vardans-edit';
 
 const navigation = [
   { name: 'About', href: '#' },
@@ -66,13 +66,13 @@ const resumeDownloadIcon = (item: {
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
-    const theme = localStorage.getItem('theme');
+    const isBrowser = typeof window !== 'undefined';
+    const theme = isBrowser ? localStorage.getItem('theme') : null;
     return theme === 'dark';
   });
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const DarkModeToggle = require('react-dark-mode-toggle-2').DarkModeToggle;
       const rootElement = document.getElementById('root');
       if (rootElement) {
         rootElement.classList.add('dark');
@@ -139,13 +139,11 @@ export default function Navbar() {
           </div>
 
           <div className='flex flex-1 justify-end lg:flex lg:flex-1 lg:justify-end'>
-            {typeof window !== 'undefined' && (
-              <DarkModeToggle
-                isDarkMode={darkMode}
-                onChange={handleToggleDarkMode}
-                size={60}
-              />
-            )}
+            <DarkModeToggle
+              isDarkMode={darkMode}
+              onChange={handleToggleDarkMode}
+              size={60}
+            />
           </div>
         </nav>
 
