@@ -10,8 +10,8 @@ export default function AboutMe() {
           aria-hidden='true'
         />
         <div className='mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8'>
-          <div className='mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8'>
-            <Reveal>
+          <Reveal>
+            <div className='mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8'>
               <div className='mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1'>
                 <p className='text-md leading-8 text-gray-600 dark:text-gray-300'>
                   Hi, I&apos;m Vardan. My world revolves around frontend
@@ -43,8 +43,6 @@ export default function AboutMe() {
                   software engineering.
                 </p>
               </div>
-            </Reveal>
-            <Reveal>
               <Image
                 src={Vardan}
                 alt='Creaters Image'
@@ -52,8 +50,8 @@ export default function AboutMe() {
                 width={500}
                 height={500}
               />
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </div>
