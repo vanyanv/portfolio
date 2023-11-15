@@ -32,7 +32,7 @@ const navigation = [
   },
 ];
 
-const resumeDownloadIcon = (item: {
+const renderNavigation = (item: {
   name: string;
   href: string;
   pdf?: string;
@@ -98,7 +98,7 @@ export default function Navbar() {
           </div>
 
           <div className='hidden lg:flex lg:gap-x-12'>
-            {navigation.map((item) => resumeDownloadIcon(item))}
+            {navigation.map((item) => renderNavigation(item))}
           </div>
 
           <div className='flex flex-1 justify-end lg:flex lg:flex-1 lg:justify-end'>
