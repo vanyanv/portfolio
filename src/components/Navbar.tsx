@@ -44,6 +44,7 @@ const renderNavigation = (item: {
         key={uuidv4()}
         href={item.href}
         download={item.pdf}
+        target='_blank'
         className='flex gap-1 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300 hover:text-indigo-500 dark:hover:text-indigo-500 '
       >
         <ArrowDownCircleIcon
@@ -60,6 +61,7 @@ const renderNavigation = (item: {
         key={uuidv4()}
         href={item.href}
         download={item.pdf}
+        target='_blank'
         className='text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300 dark:hover:text-indigo-500 relative after:bg-indigo-500 after:absolute after:h-0.5 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer'
       >
         {item.name}
