@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Vardan from '/public/Images/Vardan.png';
 import Reveal from './Reveal';
+import HomeButton from './HomeButton';
 export default function AboutMe() {
   return (
     <div className='bg-white dark:bg-black h-screen'>
@@ -54,6 +55,7 @@ export default function AboutMe() {
           </Reveal>
         </div>
       </div>
+      <HomeButton />
     </div>
   );
 }
