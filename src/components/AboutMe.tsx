@@ -1,30 +1,31 @@
 import Image from 'next/image';
 import Vardan from '/public/Images/Vardan.png';
 import Reveal from './Reveal';
+import HomeButton from './HomeButton';
 export default function AboutMe() {
   return (
     <div className='bg-white dark:bg-black h-screen'>
-      <div className='relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20 pt-14'>
+      <div className='relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20 pt-14 dark:bg-black'>
         <div
           className='absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:-mr-80 lg:-mr-96 dark:bg-black dark:shadow-black dark:ring-black dark:ring-opacity-10'
           aria-hidden='true'
         />
         <div className='mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8'>
-          <Reveal>
-            <div className='mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8'>
-              <div className='mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1'>
+          <div className='mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8'>
+            <div className='mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1'>
+              <Reveal>
                 <p className='text-md leading-8 text-gray-600 dark:text-gray-300'>
                   Hi, I&apos;m Vardan. My world revolves around frontend
                   development, where I wield TypeScript and JavaScript to
                   breathe life into clean and beautiful user interfaces.
                   Witnessing creations come to life is what fuels my passion.
-                </p>
-                <p className='text-md leading-8 text-gray-600  dark:text-gray-300'>
                   Though my heart lies in the frontend, I&apos;m no stranger to
                   the backend. I&apos;ve delved into the realms of Node/Express
                   and worked with SQL/NoSQL databases to round out my skill set.
                 </p>
-                <br></br>
+              </Reveal>
+              <br></br>
+              <Reveal>
                 <p className='text-md leading-8 text-gray-600  dark:text-gray-300'>
                   My journey in technology began when my mom handed me my first
                   computer. Since then, my enthusiasm for tech has been
@@ -33,7 +34,9 @@ export default function AboutMe() {
                   upgrading my first GPU to handle games like ConquerOnline and
                   RuneScape, which were my gaming staples at the time.
                 </p>
-                <br></br>
+              </Reveal>
+              <br></br>
+              <Reveal>
                 <p className='text-md leading-8 text-gray-600  dark:text-gray-300'>
                   This passion drove me deeper into the world of computers.
                   Building them was just the beginning; I ventured into creating
@@ -42,7 +45,9 @@ export default function AboutMe() {
                   ultimately beckoned me back to the captivating world of
                   software engineering.
                 </p>
-              </div>
+              </Reveal>
+            </div>
+            <Reveal>
               <Image
                 src={Vardan}
                 alt='Creaters Image'
@@ -50,10 +55,11 @@ export default function AboutMe() {
                 width={500}
                 height={500}
               />
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </div>
+      <HomeButton />
     </div>
   );
 }

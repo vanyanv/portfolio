@@ -125,6 +125,7 @@ export default function Navbar() {
             <div className='flex items-center justify-between'>
               <a href='#' className='-m-1.5 p-1.5'>
                 <span className='sr-only'>Vardan</span>
+                <Image src={Home} alt='home image' width={40} height={40} />
               </a>
               <button
                 type='button'

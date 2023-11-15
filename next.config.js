@@ -1,12 +1,18 @@
-/** @type {import('next').NextConfig} */
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   images: {
-    domains: [
-      'https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg',
-      'https://upload.wikimedia.org/wikipedia/commons/f/f5/Typescript.svg',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname:
+          'upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org/wikipedia/commons/f/f5/Typescript.svg',
+      },
     ],
   },
 };
