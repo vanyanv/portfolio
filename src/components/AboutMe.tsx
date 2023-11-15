@@ -24,6 +24,7 @@ export default function AboutMe() {
                   the backend. I&apos;ve delved into the realms of Node/Express
                   and worked with SQL/NoSQL databases to round out my skill set.
                 </p>
+                <br></br>
                 <p className='text-md leading-8 text-gray-600  dark:text-gray-300'>
                   My journey in technology began when my mom handed me my first
                   computer. Since then, my enthusiasm for tech has been
@@ -32,6 +33,7 @@ export default function AboutMe() {
                   upgrading my first GPU to handle games like ConquerOnline and
                   RuneScape, which were my gaming staples at the time.
                 </p>
+                <br></br>
                 <p className='text-md leading-8 text-gray-600  dark:text-gray-300'>
                   This passion drove me deeper into the world of computers.
                   Building them was just the beginning; I ventured into creating
