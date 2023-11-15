@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import {
@@ -9,11 +9,15 @@ import {
 } from '@heroicons/react/24/outline';
 import { v4 as uuidv4 } from 'uuid';
 import { DarkModeToggle } from 'react-dark-mode-toggle-vardans-edit';
+import useDarkMode from '@/hooks/useDarkMode';
+import Home from '../../public/Icons/Home.gif';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const navigation = [
-  { name: 'About', href: '#' },
-  { name: 'Tech', href: '#technologies' },
-  { name: 'Projects', href: '#projects' },
+  { name: 'About', href: '/aboutme' },
+  { name: 'Tech', href: '/#technologies' },
+  { name: 'Projects', href: '/#projects' },
   { name: 'Github', href: 'https://github.com/vanyanv' },
   {
     name: 'LinkedIn',
@@ -28,7 +32,7 @@ const navigation = [
   },
 ];
 
-const resumeDownloadIcon = (item: {
+const renderNavigation = (item: {
   name: string;
   href: string;
   pdf?: string;
@@ -40,7 +44,7 @@ const resumeDownloadIcon = (item: {
         key={uuidv4()}
         href={item.href}
         download={item.pdf}
-        className='flex gap-1 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300 hover:animate-bounce hover:text-indigo-500 dark:hover:text-indigo-500'
+        className='flex gap-1 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300 hover:text-indigo-500 dark:hover:text-indigo-500 '
       >
         <ArrowDownCircleIcon
           key={uuidv4()}
@@ -56,7 +60,11 @@ const resumeDownloadIcon = (item: {
         key={uuidv4()}
         href={item.href}
         download={item.pdf}
-        className='text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300 hover:animate-bounce  hover:text-indigo-500 dark:hover:text-indigo-500'
+        target={
+          ((item.name === 'Github' || item.name === 'LinkedIn') && '_blank') ||
+          '_self'
+        }
+        className='text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300 dark:hover:text-indigo-500 relative after:bg-indigo-500 after:absolute after:h-0.5 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer'
       >
         {item.name}
       </a>
@@ -65,51 +73,9 @@ const resumeDownloadIcon = (item: {
 };
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
-    const isBrowser = typeof window !== 'undefined';
-    const theme = isBrowser ? localStorage.getItem('theme') : null;
-    return theme === 'dark';
-  });
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const rootElement = document.getElementById('root');
-      if (rootElement) {
-        rootElement.classList.add('dark');
-      }
-
-      if (
-        localStorage.theme === 'dark' ||
-        (!('theme' in localStorage) &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-
-      return () => {
-        if (rootElement) {
-          rootElement.classList.remove('dark');
-        }
-      };
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
-    if (typeof window !== 'undefined') {
-      if (darkMode) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    }
-  }, [darkMode]);
-
-  const handleToggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  //custom hook for dark mode
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <>
@@ -119,9 +85,10 @@ export default function Navbar() {
           aria-label='Global'
         >
           <div className='flex lg:flex-1'>
-            <a href='#' className='-m-1.5 p-1.5'>
+            <Link href='/' className='-m-1.5 p-1.5'>
               <span className='sr-only'>Vardan Vanyan</span>
-            </a>
+              <Image src={Home} alt='home image' width={40} height={40} />
+            </Link>
           </div>
           <div className='flex lg:hidden'>
             <button
@@ -135,13 +102,13 @@ export default function Navbar() {
           </div>
 
           <div className='hidden lg:flex lg:gap-x-12'>
-            {navigation.map((item) => resumeDownloadIcon(item))}
+            {navigation.map((item) => renderNavigation(item))}
           </div>
 
           <div className='flex flex-1 justify-end lg:flex lg:flex-1 lg:justify-end'>
             <DarkModeToggle
               isDarkMode={darkMode}
-              onChange={handleToggleDarkMode}
+              onChange={toggleDarkMode}
               size={60}
             />
           </div>
@@ -187,7 +154,7 @@ export default function Navbar() {
                 <div className='py-6'>
                   <DarkModeToggle
                     isDarkMode={darkMode}
-                    onChange={handleToggleDarkMode}
+                    onChange={toggleDarkMode}
                     size={60}
                   />
                 </div>
