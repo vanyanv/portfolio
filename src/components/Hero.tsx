@@ -1,5 +1,5 @@
 'use client';
-import Navbar from './Navbar';
+
 import Reveal from './Reveal';
 
 export default function Hero() {
