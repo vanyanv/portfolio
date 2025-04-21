@@ -15,35 +15,42 @@ export default function AboutMe() {
             <div className='mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1'>
               <Reveal>
                 <p className='text-md leading-8 text-gray-600 dark:text-gray-300'>
-                  Hi, I&apos;m Vardan. My world revolves around frontend
-                  development, where I wield TypeScript and JavaScript to
-                  breathe life into clean and beautiful user interfaces.
-                  Witnessing creations come to life is what fuels my passion.
-                  Though my heart lies in the frontend, I&apos;m no stranger to
-                  the backend. I&apos;ve delved into the realms of Node/Express
-                  and worked with SQL/NoSQL databases to round out my skill set.
+                  My journey into software engineering wasn't exactly a straight
+                  line. While I'm now fully immersed in the world of TypeScript
+                  and React, creating clean and intuitive interfaces that users
+                  love, my path started elsewhere.
                 </p>
               </Reveal>
               <br></br>
               <Reveal>
                 <p className='text-md leading-8 text-gray-600  dark:text-gray-300'>
-                  My journey in technology began when my mom handed me my first
-                  computer. Since then, my enthusiasm for tech has been
-                  unwavering. I&apos;ve always been a hands-on explorer, diving
-                  into challenges to fix and enhance things. I distinctly recall
-                  upgrading my first GPU to handle games like ConquerOnline and
-                  RuneScape, which were my gaming staples at the time.
+                  It all began when my mom handed me my first computer as a kid.
+                  I was instantly captivated. Instead of just using it, I wanted
+                  to understand how it worked. I spent countless nights
+                  tinkering with software, learning the ins and outs of
+                  operating systems, and navigating the shadowy corners of the
+                  internet to find free games. The thrill of discovering how to
+                  modify game files or finding workarounds for software
+                  limitations taught me as much about problem-solving as the
+                  hardware upgrades I'd tackle on weekends. I still remember the
+                  sense of accomplishment after successfully installing my first
+                  GPU upgrade — a small victory that felt monumental at the
+                  time.
                 </p>
               </Reveal>
               <br></br>
               <Reveal>
                 <p className='text-md leading-8 text-gray-600  dark:text-gray-300'>
-                  This passion drove me deeper into the world of computers.
-                  Building them was just the beginning; I ventured into creating
-                  things on the computer using HTML/CSS. Although a chapter of
-                  my life led me to pursue a degree in Biology, my love for tech
-                  ultimately beckoned me back to the captivating world of
-                  software engineering.
+                  That curiosity never faded. I went from hardware tinkering to
+                  crafting websites with HTML and CSS, watching code transform
+                  into something functional before my eyes. Though I took a
+                  detour through a Biology degree, technology pulled me back to
+                  where I belonged. Today, I build seamless experiences with
+                  Next.js and TypeScript while being equally comfortable with
+                  backend technologies. As a lifelong learner, software
+                  engineering perfectly aligns with my passion for continuous
+                  growth. It's both my profession and hobby, challenging me to
+                  learn something new every day.
                 </p>
               </Reveal>
             </div>
