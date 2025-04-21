@@ -17,7 +17,7 @@ import Link from 'next/link';
 const navigation = [
   { name: 'About', href: '/aboutme' },
   { name: 'Tech', href: '/#technologies' },
-  { name: 'Projects', href: '/#projects' },
+  // { name: 'Projects', href: '/#projects' },
   { name: 'Github', href: 'https://github.com/vanyanv' },
   {
     name: 'LinkedIn',

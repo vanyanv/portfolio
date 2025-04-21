@@ -10,7 +10,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <TechStack />
-      <Projects />
+      {/* <Projects /> */}
       <ScrollToTopButton />
       <ContactMe />
     </>
