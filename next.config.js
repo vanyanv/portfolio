@@ -1,20 +1,21 @@
-/**
- * @type {import('next').NextConfig}
- */
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    remotePatterns: [
+  turbopack: {
+    root: __dirname,
+  },
+  async redirects() {
+    return [
       {
-        protocol: 'https',
-        hostname:
-          'upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg',
+        source: '/aboutme',
+        destination: '/?app=about',
+        permanent: true,
       },
-      {
-        protocol: 'https',
-        hostname: 'upload.wikimedia.org/wikipedia/commons/f/f5/Typescript.svg',
-      },
-    ],
+    ];
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

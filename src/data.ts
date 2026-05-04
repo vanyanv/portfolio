@@ -1,14 +1,8 @@
-import microbserv from '../public/Images/dashboard.jpg';
-import pokedex from '../public/Images/Pokedex.png';
-import whatsnext from '../public/Images/Whatsnext.jpeg';
-import stufflibrary from '../public/Images/StuffLibrary.png';
-import microbservWebpage from '../public/Images/Webpage.png';
-
 const Projects = [
   {
     name: 'MicrObserv',
     description: 'Observability Tool for Microservices',
-    imageUrl: microbserv,
+    imageUrl: '/Images/optimized/dashboard-thumb.webp',
 
     githubUrl: 'https://github.com/vanyanv/MicrObserv',
     linkUrl: 'https://micr-observ-website.vercel.app/',
@@ -25,7 +19,7 @@ const Projects = [
   {
     name: 'Modern Pokedex',
     description: 'A Minimalistic and Modern Pokedex',
-    imageUrl: pokedex,
+    imageUrl: '/Images/optimized/pokedex-thumb.webp',
 
     githubUrl: 'https://github.com/vanyanv/Modern-Pokedex',
     linkUrl: 'https://modernpokedex.vercel.app/',
@@ -34,7 +28,7 @@ const Projects = [
   {
     name: 'Whatsnext',
     description: 'Daily Mood Journal and Goals Tracker',
-    imageUrl: whatsnext,
+    imageUrl: '/Images/optimized/whatsnext-thumb.webp',
 
     githubUrl: 'https://github.com/InnoLVKB/whatsnext',
     linkUrl: 'https://github.com/InnoLVKB/whatsnext',
@@ -43,7 +37,7 @@ const Projects = [
   {
     name: 'Product Website',
     description: 'Product Page for MicrObserv',
-    imageUrl: microbservWebpage,
+    imageUrl: '/Images/optimized/webpage-thumb.webp',
 
     githubUrl: 'https://github.com/vanyanv/MicrObserv',
     linkUrl: 'https://micr-observ-website.vercel.app/',
@@ -52,7 +46,7 @@ const Projects = [
   {
     name: 'Stuff Library',
     description: 'Marketplace for loaning and renting stuff',
-    imageUrl: stufflibrary,
+    imageUrl: '/Images/optimized/stufflibrary-thumb.webp',
 
     githubUrl: 'https://github.com/Stuff-Library/Stuff-Library',
     linkUrl: 'https://github.com/Stuff-Library/Stuff-Library',
