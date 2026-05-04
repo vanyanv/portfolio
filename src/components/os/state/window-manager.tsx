@@ -11,6 +11,7 @@ import {
 import {
   WINDOW_IDS,
   type OriginPoint,
+  type WindowBounds,
   type WindowId,
   type WindowSizeMode,
   type WindowState,
@@ -22,12 +23,12 @@ type Action =
   | { type: 'focus'; id: WindowId }
   | { type: 'minimize'; id: WindowId }
   | { type: 'restore'; id: WindowId }
-  | { type: 'move'; id: WindowId; position: OriginPoint }
+  | { type: 'set-bounds'; id: WindowId; bounds: WindowBounds }
   | {
       type: 'size-mode';
       id: WindowId;
       sizeMode: WindowSizeMode;
-      position?: OriginPoint | null;
+      bounds?: WindowBounds | null;
     };
 
 type State = {
@@ -44,8 +45,8 @@ const initialWindows = WINDOW_IDS.reduce(
       isMinimized: false,
       openedAt: 0,
       origin: null,
-      position: null,
-      lastNormalPosition: null,
+      bounds: null,
+      lastNormalBounds: null,
       sizeMode: 'normal',
     };
     return acc;
@@ -77,8 +78,8 @@ function reducer(state: State, action: Action): State {
             isMinimized: false,
             openedAt: Date.now(),
             origin: action.origin,
-            position: wasOpen ? w.position : null,
-            lastNormalPosition: wasOpen ? w.lastNormalPosition : null,
+            bounds: wasOpen ? w.bounds : null,
+            lastNormalBounds: wasOpen ? w.lastNormalBounds : null,
             sizeMode: wasOpen ? w.sizeMode : 'normal',
           },
         },
@@ -95,8 +96,8 @@ function reducer(state: State, action: Action): State {
             ...w,
             isOpen: false,
             isMinimized: false,
-            position: null,
-            lastNormalPosition: null,
+            bounds: null,
+            lastNormalBounds: null,
             sizeMode: 'normal',
           },
         },
@@ -130,24 +131,24 @@ function reducer(state: State, action: Action): State {
         },
         focusedId: action.id,
       };
-    case 'move':
+    case 'set-bounds':
       return {
         ...state,
         windows: {
           ...state.windows,
           [action.id]: {
             ...w,
-            position: action.position,
-            lastNormalPosition: action.position,
+            bounds: action.bounds,
+            lastNormalBounds: action.bounds,
             sizeMode: 'normal',
           },
         },
       };
     case 'size-mode': {
-      const nextPosition =
+      const nextBounds =
         action.sizeMode === 'normal'
-          ? action.position ?? w.lastNormalPosition ?? w.position
-          : action.position ?? w.position;
+          ? action.bounds ?? w.lastNormalBounds ?? w.bounds
+          : action.bounds ?? w.bounds;
 
       return {
         ...state,
@@ -156,13 +157,13 @@ function reducer(state: State, action: Action): State {
           [action.id]: {
             ...w,
             openedAt: Date.now(),
-            position: nextPosition,
-            lastNormalPosition:
+            bounds: nextBounds,
+            lastNormalBounds:
               action.sizeMode === 'normal'
                 ? null
                 : w.sizeMode === 'normal'
-                  ? w.position
-                  : w.lastNormalPosition,
+                  ? w.bounds
+                  : w.lastNormalBounds,
             sizeMode: action.sizeMode,
           },
         },
@@ -179,11 +180,11 @@ type Ctx = {
   focus: (id: WindowId) => void;
   minimize: (id: WindowId) => void;
   restore: (id: WindowId) => void;
-  move: (id: WindowId, position: OriginPoint) => void;
+  setBounds: (id: WindowId, bounds: WindowBounds) => void;
   setSizeMode: (
     id: WindowId,
     sizeMode: WindowSizeMode,
-    position?: OriginPoint | null,
+    bounds?: WindowBounds | null,
   ) => void;
 };
 
@@ -213,23 +214,32 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     (id: WindowId) => dispatch({ type: 'restore', id }),
     [],
   );
-  const move = useCallback(
-    (id: WindowId, position: OriginPoint) =>
-      dispatch({ type: 'move', id, position }),
+  const setBounds = useCallback(
+    (id: WindowId, bounds: WindowBounds) =>
+      dispatch({ type: 'set-bounds', id, bounds }),
     [],
   );
   const setSizeMode = useCallback(
     (
       id: WindowId,
       sizeMode: WindowSizeMode,
-      position: OriginPoint | null = null,
-    ) => dispatch({ type: 'size-mode', id, sizeMode, position }),
+      bounds: WindowBounds | null = null,
+    ) => dispatch({ type: 'size-mode', id, sizeMode, bounds }),
     [],
   );
 
   const value = useMemo(
-    () => ({ state, open, close, focus, minimize, restore, move, setSizeMode }),
-    [state, open, close, focus, minimize, restore, move, setSizeMode],
+    () => ({
+      state,
+      open,
+      close,
+      focus,
+      minimize,
+      restore,
+      setBounds,
+      setSizeMode,
+    }),
+    [state, open, close, focus, minimize, restore, setBounds, setSizeMode],
   );
 
   return (
@@ -256,8 +266,8 @@ export function useWindow(id: WindowId) {
     focus: () => ctx.focus(id),
     minimize: () => ctx.minimize(id),
     restore: () => ctx.restore(id),
-    move: (position: OriginPoint) => ctx.move(id, position),
-    setSizeMode: (sizeMode: WindowSizeMode, position?: OriginPoint | null) =>
-      ctx.setSizeMode(id, sizeMode, position),
+    setBounds: (bounds: WindowBounds) => ctx.setBounds(id, bounds),
+    setSizeMode: (sizeMode: WindowSizeMode, bounds?: WindowBounds | null) =>
+      ctx.setSizeMode(id, sizeMode, bounds),
   };
 }

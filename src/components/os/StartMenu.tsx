@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useWindowManager } from './state/window-manager';
 import { useSession } from './state/session';
+import { useBrowser } from './state/browser';
 import { WINDOW_META } from './windows-meta';
 import { DESKTOP_SHORTCUTS, runShortcut, type ShortcutMeta } from './shortcuts';
 import { PowerIcon, SearchIcon } from './icons';
@@ -15,6 +16,7 @@ type Props = {
 
 export function StartMenu({ open, onClose }: Props) {
   const { open: openWindow, state } = useWindowManager();
+  const { openBrowser } = useBrowser();
   const { signOut } = useSession();
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -54,7 +56,7 @@ export function StartMenu({ open, onClose }: Props) {
     .slice(0, 4);
 
   const handleOpen = (shortcut: ShortcutMeta) => {
-    runShortcut(shortcut.action, openWindow);
+    runShortcut(shortcut.action, openWindow, openBrowser);
     onClose();
   };
 

@@ -95,6 +95,35 @@ export function GridIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function CodeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M6.25 4.25L3 8l3.25 3.75" />
+      <path d="M9.75 4.25L13 8l-3.25 3.75" />
+      <path d="M8.8 2.75l-1.6 10.5" />
+    </svg>
+  );
+}
+
+export function TerminalIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M3 4.5l3.2 3.5L3 11.5" />
+      <path d="M7.5 11.5H13" />
+    </svg>
+  );
+}
+
+export function ChromeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="8" cy="8" r="5.75" />
+      <circle cx="8" cy="8" r="2.2" />
+      <path d="M8 2.25h5.25M3.1 5.15l2.65 4.6M10.25 9.75l-2.7 4.55" />
+    </svg>
+  );
+}
+
 export function StartIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...base} {...props}>
@@ -205,6 +234,98 @@ export function ReadmeAppIcon(props: SVGProps<SVGSVGElement>) {
       <line x1="13" y1="30" x2="35" y2="30" stroke="oklch(0.55 0.18 240)" strokeWidth="1.6" strokeLinecap="round" />
       <line x1="13" y1="35" x2="27" y2="35" stroke="oklch(0.55 0.18 240)" strokeWidth="1.6" strokeLinecap="round" />
       <line className="icon-caret" x1="28.6" y1="33.2" x2="28.6" y2="37" stroke="oklch(0.45 0.22 240)" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function CodeAppIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...appBase} {...props}>
+      <defs>
+        <linearGradient id="vscode-body" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="oklch(0.68 0.19 235)" />
+          <stop offset="1" stopColor="oklch(0.48 0.22 250)" />
+        </linearGradient>
+        <linearGradient id="vscode-ribbon" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="oklch(0.78 0.15 225)" />
+          <stop offset="1" stopColor="oklch(0.58 0.2 245)" />
+        </linearGradient>
+      </defs>
+      <rect x="6" y="6" width="36" height="36" rx="8" fill="oklch(0.27 0.09 250 / 0.24)" />
+      <path
+        className="icon-link-tilt"
+        d="M37 9.5 20.8 24 37 38.5c1.8 1.6 4.6.35 4.6-2.1V11.6c0-2.45-2.8-3.7-4.6-2.1z"
+        fill="url(#vscode-body)"
+      />
+      <path
+        d="M20.8 24 10.7 33.1c-1 .9-2.55.85-3.45-.15L4.6 30c-.82-.9-.76-2.3.15-3.1L13.2 19 4.75 11.1c-.9-.85-.97-2.25-.15-3.15l2.65-2.9c.9-1 2.45-1.05 3.45-.15L20.8 14 29.3 6.45c1.35-1.2 3.5-.25 3.5 1.55v32c0 1.8-2.15 2.75-3.5 1.55z"
+        fill="url(#vscode-ribbon)"
+      />
+      <path
+        d="M20.8 14v20L32.8 24z"
+        fill="oklch(0.42 0.18 250 / 0.42)"
+      />
+      <path
+        d="M13.2 19 20.8 24 13.2 29"
+        stroke="oklch(0.98 0.01 235 / 0.82)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function TerminalAppIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...appBase} {...props}>
+      <defs>
+        <linearGradient id="terminal-body" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="oklch(0.24 0.035 150)" />
+          <stop offset="1" stopColor="oklch(0.16 0.025 210)" />
+        </linearGradient>
+      </defs>
+      <rect x="5" y="8" width="38" height="32" rx="6" fill="oklch(0 0 0 / 0.24)" />
+      <rect x="5" y="6" width="38" height="32" rx="6" fill="url(#terminal-body)" />
+      <rect x="5" y="6" width="38" height="8" rx="6" fill="oklch(0.98 0.01 150 / 0.12)" />
+      <circle cx="12" cy="10" r="1.5" fill="oklch(0.72 0.16 30)" />
+      <circle cx="17" cy="10" r="1.5" fill="oklch(0.78 0.16 90)" />
+      <circle cx="22" cy="10" r="1.5" fill="oklch(0.74 0.18 150)" />
+      <path
+        className="icon-caret"
+        d="M13 22l5 4-5 4M21 30h11"
+        stroke="oklch(0.78 0.18 150)"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function ChromeAppIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...appBase} {...props}>
+      <defs>
+        <linearGradient id="chrome-red" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="oklch(0.72 0.2 30)" />
+          <stop offset="1" stopColor="oklch(0.62 0.22 20)" />
+        </linearGradient>
+        <linearGradient id="chrome-green" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="oklch(0.78 0.18 145)" />
+          <stop offset="1" stopColor="oklch(0.58 0.18 155)" />
+        </linearGradient>
+        <linearGradient id="chrome-yellow" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="oklch(0.86 0.16 85)" />
+          <stop offset="1" stopColor="oklch(0.72 0.17 75)" />
+        </linearGradient>
+      </defs>
+      <circle cx="24" cy="25" r="19" fill="oklch(0 0 0 / 0.2)" />
+      <path d="M24 5a19 19 0 0 1 16.4 9.5H24a9.5 9.5 0 0 0-8.2 4.75L8.1 5.9A18.9 18.9 0 0 1 24 5z" fill="url(#chrome-red)" />
+      <path d="M40.4 14.5A19 19 0 0 1 24 43l8.2-14.25A9.5 9.5 0 0 0 24 14.5z" fill="url(#chrome-green)" />
+      <path d="M24 43A19 19 0 0 1 8.1 5.9l7.7 13.35A9.5 9.5 0 0 0 24 33.5z" fill="url(#chrome-yellow)" />
+      <circle cx="24" cy="24" r="9.5" fill="oklch(0.98 0.01 240)" />
+      <circle className="icon-about-grad" cx="24" cy="24" r="5.7" fill="oklch(0.68 0.18 240)" />
     </svg>
   );
 }

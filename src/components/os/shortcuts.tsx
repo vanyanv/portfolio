@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { GithubAppIcon, LinkedinAppIcon } from './icons';
+import type { BrowserPage } from './state/browser';
 import type { OriginPoint, WindowId } from './state/types';
 import { DESKTOP_ICON_ORDER, WINDOW_META } from './windows-meta';
 
@@ -8,6 +9,7 @@ export type ShortcutId = WindowId | ExternalShortcutId;
 
 export type ShortcutAction =
   | { kind: 'window'; id: WindowId }
+  | { kind: 'browser'; page: BrowserPage }
   | { kind: 'external'; href: string };
 
 export type ShortcutMeta = {
@@ -38,7 +40,7 @@ export const EXTERNAL_SHORTCUTS: ShortcutMeta[] = [
     searchText: 'GitHub source code repositories',
     desktopIcon: <GithubAppIcon className="h-12 w-12" />,
     launcherIcon: <GithubAppIcon className="h-10 w-10" />,
-    action: { kind: 'external', href: 'https://github.com/vanyanv' },
+    action: { kind: 'browser', page: 'github' },
   },
   {
     id: 'linkedin',
@@ -46,10 +48,7 @@ export const EXTERNAL_SHORTCUTS: ShortcutMeta[] = [
     searchText: 'LinkedIn profile professional network',
     desktopIcon: <LinkedinAppIcon className="h-12 w-12" />,
     launcherIcon: <LinkedinAppIcon className="h-10 w-10" />,
-    action: {
-      kind: 'external',
-      href: 'https://www.linkedin.com/in/vardanvanyan/',
-    },
+    action: { kind: 'browser', page: 'linkedin' },
   },
 ];
 
@@ -65,10 +64,16 @@ export function openExternalShortcut(href: string) {
 export function runShortcut(
   action: ShortcutAction,
   openWindow: (id: WindowId, origin?: OriginPoint | null) => void,
+  openBrowser?: (page: BrowserPage, origin?: OriginPoint | null) => void,
   origin?: OriginPoint | null,
 ) {
   if (action.kind === 'external') {
     openExternalShortcut(action.href);
+    return;
+  }
+
+  if (action.kind === 'browser') {
+    openBrowser?.(action.page, origin);
     return;
   }
 

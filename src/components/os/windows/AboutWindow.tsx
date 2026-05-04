@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-const Vardan = '/Images/Vardan.png';
+const Vardan = '/Images/optimized/vardan-avatar.webp';
 
 export function AboutWindowContent() {
   return (
@@ -25,7 +25,6 @@ export function AboutWindowContent() {
               width={192}
               height={192}
               className="h-full w-full object-cover"
-              priority
             />
           </div>
           <div className="pb-1">

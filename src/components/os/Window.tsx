@@ -12,18 +12,15 @@ import {
   type ReactNode,
 } from 'react';
 import { useWindow } from './state/window-manager';
-import type { OriginPoint, WindowId, WindowSizeMode } from './state/types';
+import type {
+  WindowBounds,
+  WindowId,
+  WindowSizeMode,
+} from './state/types';
 import { cn } from '@/lib/cn';
 import { CloseIcon, MaximizeIcon, MinimizeIcon } from './icons';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
-
-const sizeClasses: Record<Size, string> = {
-  sm: 'w-[min(440px,calc(100vw-16px))] h-[min(420px,calc(100dvh-110px))]',
-  md: 'w-[min(640px,calc(100vw-16px))] h-[min(540px,calc(100dvh-110px))]',
-  lg: 'w-[min(820px,calc(100vw-16px))] h-[min(600px,calc(100dvh-110px))]',
-  xl: 'w-[min(920px,calc(100vw-16px))] h-[min(640px,calc(100dvh-110px))]',
-};
 
 const preferredSizes: Record<Size, { width: number; height: number }> = {
   sm: { width: 440, height: 420 },
@@ -46,17 +43,26 @@ type DragState = {
   pointerId: number;
   startPointerX: number;
   startPointerY: number;
-  startX: number;
-  startY: number;
-  width: number;
-  height: number;
+  startBounds: WindowBounds;
   snap: WindowSizeMode | null;
+};
+
+type ResizeDirection = 'n' | 's' | 'e' | 'w' | 'ne' | 'nw' | 'se' | 'sw';
+
+type ResizeState = {
+  pointerId: number;
+  startPointerX: number;
+  startPointerY: number;
+  startBounds: WindowBounds;
+  direction: ResizeDirection;
 };
 
 const CASCADE_OFFSET = 32;
 const VIEWPORT_GUTTER = 8;
 const SNAP_EDGE = 28;
 const TASKBAR_RESERVE = 80;
+const MIN_WINDOW_WIDTH = 320;
+const MIN_WINDOW_HEIGHT = 260;
 
 export const Window = forwardRef<HTMLDivElement, Props>(function Window(
   { id, title, icon, size = 'md', children, stackIndex },
@@ -68,7 +74,7 @@ export const Window = forwardRef<HTMLDivElement, Props>(function Window(
     close,
     focus,
     minimize,
-    move,
+    setBounds,
     setSizeMode,
   } = useWindow(id);
   const [closing, setClosing] = useState(false);
@@ -77,7 +83,8 @@ export const Window = forwardRef<HTMLDivElement, Props>(function Window(
   const frameRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const dragRef = useRef<DragState | null>(null);
-  const pendingPositionRef = useRef<OriginPoint | null>(null);
+  const resizeRef = useRef<ResizeState | null>(null);
+  const pendingBoundsRef = useRef<WindowBounds | null>(null);
   const rafRef = useRef<number | null>(null);
 
   const offset = stackIndex * CASCADE_OFFSET;
@@ -129,15 +136,15 @@ export const Window = forwardRef<HTMLDivElement, Props>(function Window(
     setSizeMode(state.sizeMode === 'maximized' ? 'normal' : 'maximized');
   };
 
-  const scheduleMove = (position: OriginPoint) => {
-    pendingPositionRef.current = position;
+  const scheduleBounds = (bounds: WindowBounds) => {
+    pendingBoundsRef.current = bounds;
     if (rafRef.current !== null) return;
 
     rafRef.current = requestAnimationFrame(() => {
       rafRef.current = null;
-      const pending = pendingPositionRef.current;
-      pendingPositionRef.current = null;
-      if (pending) move(pending);
+      const pending = pendingBoundsRef.current;
+      pendingBoundsRef.current = null;
+      if (pending) setBounds(pending);
     });
   };
 
@@ -149,44 +156,37 @@ export const Window = forwardRef<HTMLDivElement, Props>(function Window(
     if (!rect) return;
 
     e.preventDefault();
+    capturePointer(e);
     focus();
 
-    const normalSize =
+    const rectBounds = rectToBounds(rect);
+    let startBounds =
       state.sizeMode === 'normal'
-        ? { width: rect.width, height: rect.height }
-        : getNormalSize(size);
-
-    let startX = rect.left;
-    let startY = rect.top;
+        ? clampBounds(state.bounds ?? rectBounds)
+        : clampBounds(state.bounds ?? getInitialBounds(size, offset));
 
     if (state.sizeMode !== 'normal') {
       const pointerRatio = (e.clientX - rect.left) / Math.max(rect.width, 1);
-      startX = clamp(
-        e.clientX - normalSize.width * pointerRatio,
-        VIEWPORT_GUTTER,
-        window.innerWidth - normalSize.width - VIEWPORT_GUTTER,
-      );
-      startY = VIEWPORT_GUTTER;
-      setSizeMode('normal', { x: startX, y: startY });
-    } else if (!state.position) {
-      const clamped = clampPosition(
-        { x: rect.left, y: rect.top },
-        rect.width,
-        rect.height,
-      );
-      startX = clamped.x;
-      startY = clamped.y;
-      move(clamped);
+      startBounds = clampBounds({
+        ...startBounds,
+        x: clamp(
+          e.clientX - startBounds.width * pointerRatio,
+          VIEWPORT_GUTTER,
+          window.innerWidth - startBounds.width - VIEWPORT_GUTTER,
+        ),
+        y: VIEWPORT_GUTTER,
+      });
+      setSizeMode('normal', startBounds);
+    } else if (!state.bounds) {
+      startBounds = clampBounds(rectBounds);
+      setBounds(startBounds);
     }
 
     dragRef.current = {
       pointerId: e.pointerId,
       startPointerX: e.clientX,
       startPointerY: e.clientY,
-      startX,
-      startY,
-      width: normalSize.width,
-      height: normalSize.height,
+      startBounds,
       snap: null,
     };
 
@@ -194,18 +194,56 @@ export const Window = forwardRef<HTMLDivElement, Props>(function Window(
     window.addEventListener('pointerup', handleGlobalPointerUp);
   }
 
+  function handleResizePointerDown(
+    e: ReactPointerEvent<HTMLElement>,
+    direction: ResizeDirection,
+  ) {
+    if (e.button !== 0 || state.sizeMode !== 'normal') return;
+
+    const rect = frameRef.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    capturePointer(e);
+    focus();
+
+    const startBounds = clampBounds(state.bounds ?? rectToBounds(rect));
+    if (!state.bounds) setBounds(startBounds);
+
+    resizeRef.current = {
+      pointerId: e.pointerId,
+      startPointerX: e.clientX,
+      startPointerY: e.clientY,
+      startBounds,
+      direction,
+    };
+
+    window.addEventListener('pointermove', handleGlobalPointerMove);
+    window.addEventListener('pointerup', handleGlobalPointerUp);
+  }
+
   function handleGlobalPointerMove(e: PointerEvent) {
+    const resize = resizeRef.current;
+    if (resize && e.pointerId === resize.pointerId) {
+      const next = getResizeBounds(
+        resize.startBounds,
+        resize.direction,
+        e.clientX - resize.startPointerX,
+        e.clientY - resize.startPointerY,
+      );
+      scheduleBounds(next);
+      return;
+    }
+
     const drag = dragRef.current;
     if (!drag || e.pointerId !== drag.pointerId) return;
 
-    const next = clampPosition(
-      {
-        x: drag.startX + e.clientX - drag.startPointerX,
-        y: drag.startY + e.clientY - drag.startPointerY,
-      },
-      drag.width,
-      drag.height,
-    );
+    const next = clampBounds({
+      ...drag.startBounds,
+      x: drag.startBounds.x + e.clientX - drag.startPointerX,
+      y: drag.startBounds.y + e.clientY - drag.startPointerY,
+    });
 
     const nextSnap =
       e.clientX <= SNAP_EDGE
@@ -216,10 +254,27 @@ export const Window = forwardRef<HTMLDivElement, Props>(function Window(
 
     drag.snap = nextSnap;
     setSnapPreview(nextSnap);
-    scheduleMove(next);
+    scheduleBounds(next);
   }
 
   function handleGlobalPointerUp(e: PointerEvent) {
+    const resize = resizeRef.current;
+    if (resize && e.pointerId === resize.pointerId) {
+      window.removeEventListener('pointermove', handleGlobalPointerMove);
+      window.removeEventListener('pointerup', handleGlobalPointerUp);
+      resizeRef.current = null;
+
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+
+      const pending = pendingBoundsRef.current;
+      pendingBoundsRef.current = null;
+      if (pending) setBounds(pending);
+      return;
+    }
+
     const drag = dragRef.current;
     if (!drag || e.pointerId !== drag.pointerId) return;
 
@@ -234,34 +289,38 @@ export const Window = forwardRef<HTMLDivElement, Props>(function Window(
     }
 
     if (drag.snap) {
-      pendingPositionRef.current = null;
+      pendingBoundsRef.current = null;
       setSizeMode(drag.snap);
       return;
     }
 
-    const pending = pendingPositionRef.current;
-    pendingPositionRef.current = null;
-    if (pending) move(pending);
+    const pending = pendingBoundsRef.current;
+    pendingBoundsRef.current = null;
+    if (pending) setBounds(pending);
   }
 
   if (!state.isOpen || state.isMinimized) return null;
 
+  const normalBounds = state.bounds ?? getInitialBounds(size, offset);
   const modeLayout = getModeLayout(state.sizeMode);
   const frameStyle: CSSProperties = {
     zIndex: 100 + (isFocused ? 1000 : stackIndex),
     ...(modeLayout
       ? modeLayout.frame
-      : state.position
-        ? {
-            left: state.position.x,
-            top: state.position.y,
-            transform: 'none',
-          }
-        : {
-            left: '50%',
-            top: `calc(50% - ${TASKBAR_RESERVE / 2}px + ${offset}px)`,
-            transform: `translate(calc(-50% + ${offset}px), -50%)`,
-          }),
+      : {
+          left: normalBounds.x,
+          top: normalBounds.y,
+          transform: 'none',
+        }),
+  };
+
+  const innerStyle: CSSProperties = {
+    transformOrigin: state.origin
+      ? `var(--origin-x) var(--origin-y)`
+      : 'center',
+    ...(state.sizeMode === 'normal'
+      ? { width: normalBounds.width, height: normalBounds.height }
+      : modeLayout?.inner),
   };
 
   const originStyle = state.origin
@@ -294,20 +353,19 @@ export const Window = forwardRef<HTMLDivElement, Props>(function Window(
       >
         <div
           className={cn(
-            'pointer-events-auto flex flex-col overflow-hidden rounded-window border mica',
+            'pointer-events-auto relative flex flex-col overflow-hidden border',
             'transition-[border-color,opacity,box-shadow] duration-200',
+            state.sizeMode === 'maximized'
+              ? 'rounded-none bg-bg-1'
+              : 'rounded-window mica',
             isFocused
               ? 'border-hairline opacity-100 shadow-window'
               : 'border-border/40 opacity-90 shadow-floating',
-            state.sizeMode === 'normal' && sizeClasses[size],
             closing ? 'animate-window-close' : 'animate-window-open',
           )}
           style={{
-            transformOrigin: state.origin
-              ? `var(--origin-x) var(--origin-y)`
-              : 'center',
+            ...innerStyle,
             ...originStyle,
-            ...modeLayout?.inner,
           }}
         >
           <header
@@ -358,11 +416,254 @@ export const Window = forwardRef<HTMLDivElement, Props>(function Window(
           >
             {children}
           </div>
+
+          {state.sizeMode === 'normal' && !closing && (
+            <ResizeHandles onPointerDown={handleResizePointerDown} />
+          )}
         </div>
       </div>
     </>
   );
 });
+
+function ResizeHandles({
+  onPointerDown,
+}: {
+  onPointerDown: (
+    e: ReactPointerEvent<HTMLElement>,
+    direction: ResizeDirection,
+  ) => void;
+}) {
+  const handles: Array<{
+    direction: ResizeDirection;
+    className: string;
+  }> = [
+    {
+      direction: 'n',
+      className: 'inset-x-3 top-0 h-2 cursor-n-resize',
+    },
+    {
+      direction: 's',
+      className: 'inset-x-3 bottom-0 h-2 cursor-s-resize',
+    },
+    {
+      direction: 'e',
+      className: 'right-0 top-3 bottom-3 w-2 cursor-e-resize',
+    },
+    {
+      direction: 'w',
+      className: 'left-0 top-3 bottom-3 w-2 cursor-w-resize',
+    },
+    {
+      direction: 'ne',
+      className: 'right-0 top-0 h-4 w-4 cursor-ne-resize',
+    },
+    {
+      direction: 'nw',
+      className: 'left-0 top-0 h-4 w-4 cursor-nw-resize',
+    },
+    {
+      direction: 'se',
+      className: 'right-0 bottom-0 h-4 w-4 cursor-se-resize',
+    },
+    {
+      direction: 'sw',
+      className: 'left-0 bottom-0 h-4 w-4 cursor-sw-resize',
+    },
+  ];
+
+  return (
+    <>
+      {handles.map(({ direction, className }) => (
+        <div
+          key={direction}
+          aria-hidden
+          className={cn('absolute z-20 touch-none', className)}
+          onPointerDown={(e) => onPointerDown(e, direction)}
+        />
+      ))}
+    </>
+  );
+}
+
+function capturePointer(e: ReactPointerEvent<HTMLElement>) {
+  if (!e.currentTarget.hasPointerCapture(e.pointerId)) {
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }
+}
+
+function rectToBounds(rect: DOMRect): WindowBounds {
+  return {
+    x: rect.left,
+    y: rect.top,
+    width: rect.width,
+    height: rect.height,
+  };
+}
+
+function getInitialBounds(size: Size, offset: number): WindowBounds {
+  const normalSize = getNormalSize(size);
+  return clampBounds({
+    width: normalSize.width,
+    height: normalSize.height,
+    x: (getViewportWidth() - normalSize.width) / 2 + offset,
+    y:
+      (getViewportHeight() - TASKBAR_RESERVE - normalSize.height) / 2 + offset,
+  });
+}
+
+function getNormalSize(size: Size) {
+  const preferred = preferredSizes[size];
+  const maxWidth = Math.max(1, getViewportWidth() - VIEWPORT_GUTTER * 2);
+  const maxHeight = Math.max(
+    1,
+    getViewportHeight() - TASKBAR_RESERVE - VIEWPORT_GUTTER * 2,
+  );
+
+  return {
+    width: clampDimension(preferred.width, MIN_WINDOW_WIDTH, maxWidth),
+    height: clampDimension(preferred.height, MIN_WINDOW_HEIGHT, maxHeight),
+  };
+}
+
+function getResizeBounds(
+  start: WindowBounds,
+  direction: ResizeDirection,
+  deltaX: number,
+  deltaY: number,
+): WindowBounds {
+  const minWidth = getEffectiveMinWidth();
+  const minHeight = getEffectiveMinHeight();
+  const maxRight = getViewportWidth() - VIEWPORT_GUTTER;
+  const maxBottom = getViewportHeight() - TASKBAR_RESERVE - VIEWPORT_GUTTER;
+
+  let left = start.x;
+  let top = start.y;
+  let right = start.x + start.width;
+  let bottom = start.y + start.height;
+
+  if (direction.includes('e')) {
+    right = clamp(start.x + start.width + deltaX, left + minWidth, maxRight);
+  }
+  if (direction.includes('w')) {
+    left = clamp(start.x + deltaX, VIEWPORT_GUTTER, right - minWidth);
+  }
+  if (direction.includes('s')) {
+    bottom = clamp(start.y + start.height + deltaY, top + minHeight, maxBottom);
+  }
+  if (direction.includes('n')) {
+    top = clamp(start.y + deltaY, VIEWPORT_GUTTER, bottom - minHeight);
+  }
+
+  return clampBounds({
+    x: left,
+    y: top,
+    width: right - left,
+    height: bottom - top,
+  });
+}
+
+function clampBounds(bounds: WindowBounds): WindowBounds {
+  const width = clampDimension(
+    bounds.width,
+    MIN_WINDOW_WIDTH,
+    getViewportWidth() - VIEWPORT_GUTTER * 2,
+  );
+  const height = clampDimension(
+    bounds.height,
+    MIN_WINDOW_HEIGHT,
+    getViewportHeight() - TASKBAR_RESERVE - VIEWPORT_GUTTER * 2,
+  );
+  const maxX = Math.max(VIEWPORT_GUTTER, getViewportWidth() - width - VIEWPORT_GUTTER);
+  const maxY = Math.max(
+    VIEWPORT_GUTTER,
+    getViewportHeight() - TASKBAR_RESERVE - height - VIEWPORT_GUTTER,
+  );
+
+  return {
+    x: clamp(bounds.x, VIEWPORT_GUTTER, maxX),
+    y: clamp(bounds.y, VIEWPORT_GUTTER, maxY),
+    width,
+    height,
+  };
+}
+
+function getEffectiveMinWidth() {
+  return Math.max(
+    1,
+    Math.min(MIN_WINDOW_WIDTH, getViewportWidth() - VIEWPORT_GUTTER * 2),
+  );
+}
+
+function getEffectiveMinHeight() {
+  return Math.max(
+    1,
+    Math.min(
+      MIN_WINDOW_HEIGHT,
+      getViewportHeight() - TASKBAR_RESERVE - VIEWPORT_GUTTER * 2,
+    ),
+  );
+}
+
+function clampDimension(value: number, min: number, max: number) {
+  const effectiveMax = Math.max(1, max);
+  const effectiveMin = Math.min(min, effectiveMax);
+  return clamp(value, effectiveMin, effectiveMax);
+}
+
+function getViewportWidth() {
+  if (typeof window === 'undefined') return 1024;
+  return window.innerWidth;
+}
+
+function getViewportHeight() {
+  if (typeof window === 'undefined') return 768;
+  return window.innerHeight;
+}
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), Math.max(min, max));
+}
+
+function getModeLayout(sizeMode: WindowSizeMode):
+  | { frame: CSSProperties; inner: CSSProperties }
+  | null {
+  if (sizeMode === 'normal') return null;
+
+  const height = `calc(100dvh - ${TASKBAR_RESERVE}px)`;
+  if (sizeMode === 'maximized') {
+    return {
+      frame: { left: 0, top: 0, transform: 'none' },
+      inner: {
+        width: '100vw',
+        height,
+      },
+    };
+  }
+
+  return {
+    frame: {
+      left:
+        sizeMode === 'snapped-left'
+          ? VIEWPORT_GUTTER
+          : `calc(50vw + ${VIEWPORT_GUTTER / 2}px)`,
+      top: VIEWPORT_GUTTER,
+      transform: 'none',
+    },
+    inner: {
+      width: `calc(50vw - ${VIEWPORT_GUTTER * 1.5}px)`,
+      height: `calc(100dvh - ${TASKBAR_RESERVE + VIEWPORT_GUTTER}px)`,
+    },
+  };
+}
+
+function getSnapPreviewStyle(sizeMode: WindowSizeMode): CSSProperties {
+  const layout = getModeLayout(sizeMode);
+  return {
+    ...layout?.frame,
+    ...layout?.inner,
+  };
+}
 
 function ControlButton({
   label,
@@ -392,73 +693,4 @@ function ControlButton({
       {children}
     </button>
   );
-}
-
-function getNormalSize(size: Size) {
-  const preferred = preferredSizes[size];
-  return {
-    width: Math.min(preferred.width, window.innerWidth - VIEWPORT_GUTTER * 2),
-    height: Math.min(preferred.height, window.innerHeight - 110),
-  };
-}
-
-function clampPosition(
-  position: OriginPoint,
-  width: number,
-  height: number,
-): OriginPoint {
-  const maxX = Math.max(VIEWPORT_GUTTER, window.innerWidth - width - VIEWPORT_GUTTER);
-  const maxY = Math.max(
-    VIEWPORT_GUTTER,
-    window.innerHeight - TASKBAR_RESERVE - height,
-  );
-
-  return {
-    x: clamp(position.x, VIEWPORT_GUTTER, maxX),
-    y: clamp(position.y, VIEWPORT_GUTTER, maxY),
-  };
-}
-
-function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
-}
-
-function getModeLayout(sizeMode: WindowSizeMode):
-  | { frame: CSSProperties; inner: CSSProperties }
-  | null {
-  if (sizeMode === 'normal') return null;
-
-  const height = `calc(100dvh - ${TASKBAR_RESERVE + VIEWPORT_GUTTER}px)`;
-  if (sizeMode === 'maximized') {
-    return {
-      frame: { left: VIEWPORT_GUTTER, top: VIEWPORT_GUTTER, transform: 'none' },
-      inner: {
-        width: `calc(100vw - ${VIEWPORT_GUTTER * 2}px)`,
-        height,
-      },
-    };
-  }
-
-  return {
-    frame: {
-      left:
-        sizeMode === 'snapped-left'
-          ? VIEWPORT_GUTTER
-          : `calc(50vw + ${VIEWPORT_GUTTER / 2}px)`,
-      top: VIEWPORT_GUTTER,
-      transform: 'none',
-    },
-    inner: {
-      width: `calc(50vw - ${VIEWPORT_GUTTER * 1.5}px)`,
-      height,
-    },
-  };
-}
-
-function getSnapPreviewStyle(sizeMode: WindowSizeMode): CSSProperties {
-  const layout = getModeLayout(sizeMode);
-  return {
-    ...layout?.frame,
-    ...layout?.inner,
-  };
 }

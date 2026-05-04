@@ -1,5 +1,7 @@
 export const WINDOW_IDS = [
   'readme',
+  'terminal',
+  'chrome',
   'about',
   'projects',
   'tech',
@@ -10,6 +12,7 @@ export const WINDOW_IDS = [
 export type WindowId = (typeof WINDOW_IDS)[number];
 
 export type OriginPoint = { x: number; y: number };
+export type WindowBounds = OriginPoint & { width: number; height: number };
 export type WindowSizeMode = 'normal' | 'maximized' | 'snapped-left' | 'snapped-right';
 
 export type WindowState = {
@@ -18,8 +21,8 @@ export type WindowState = {
   isMinimized: boolean;
   openedAt: number;
   origin: OriginPoint | null;
-  position: OriginPoint | null;
-  lastNormalPosition: OriginPoint | null;
+  bounds: WindowBounds | null;
+  lastNormalBounds: WindowBounds | null;
   sizeMode: WindowSizeMode;
 };
 

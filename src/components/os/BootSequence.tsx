@@ -1,8 +1,8 @@
 'use client';
 
-import { SessionAura3D } from './SessionAura3D';
 import { Wallpaper } from './Wallpaper';
 import { VanyanLogo } from './icons';
+import { LazySessionAura3D } from './LazySessionAura3D';
 
 export function BootSequence() {
   return (
@@ -18,7 +18,7 @@ export function BootSequence() {
         className="pointer-events-none fixed inset-0 z-0"
         style={{ background: 'oklch(0.08 0.02 var(--accent-h) / 0.88)' }}
       />
-      <SessionAura3D variant="boot" />
+      <LazySessionAura3D variant="boot" />
 
       <div className="relative z-10 animate-boot-pulse text-fg-0 drop-shadow-[0_0_28px_oklch(0.66_0.22_var(--accent-h)_/_0.42)]">
         <VanyanLogo className="h-16 w-16" />

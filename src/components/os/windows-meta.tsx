@@ -2,16 +2,19 @@ import type { ReactNode } from 'react';
 import {
   AboutAppIcon,
   AppsAppIcon,
+  ChromeAppIcon,
+  ChromeIcon,
   ContactAppIcon,
-  FileIcon,
+  CodeAppIcon,
   FolderIcon,
   GridIcon,
   MailIcon,
   PdfIcon,
   PersonIcon,
   ProjectsAppIcon,
-  ReadmeAppIcon,
   ResumeAppIcon,
+  TerminalAppIcon,
+  TerminalIcon,
 } from './icons';
 import type { WindowId } from './state/types';
 
@@ -28,12 +31,30 @@ export type WindowMeta = {
 export const WINDOW_META: Record<WindowId, WindowMeta> = {
   readme: {
     id: 'readme',
-    title: 'README.txt — Notepad',
-    desktopLabel: 'README.txt',
-    desktopIcon: <ReadmeAppIcon className="h-12 w-12" />,
-    launcherIcon: <ReadmeAppIcon className="h-10 w-10" />,
-    titleBarIcon: <FileIcon className="h-4 w-4" />,
-    size: 'md',
+    title: 'README.md - portfolio - Visual Studio Code',
+    desktopLabel: 'VS Code',
+    desktopIcon: <CodeAppIcon className="h-12 w-12" />,
+    launcherIcon: <CodeAppIcon className="h-10 w-10" />,
+    titleBarIcon: <CodeAppIcon className="h-4 w-4" />,
+    size: 'xl',
+  },
+  terminal: {
+    id: 'terminal',
+    title: 'Vardan Terminal',
+    desktopLabel: 'Terminal',
+    desktopIcon: <TerminalAppIcon className="h-12 w-12" />,
+    launcherIcon: <TerminalAppIcon className="h-10 w-10" />,
+    titleBarIcon: <TerminalIcon className="h-4 w-4" />,
+    size: 'lg',
+  },
+  chrome: {
+    id: 'chrome',
+    title: 'Vanyan Chrome',
+    desktopLabel: 'Chrome',
+    desktopIcon: <ChromeAppIcon className="h-12 w-12" />,
+    launcherIcon: <ChromeAppIcon className="h-10 w-10" />,
+    titleBarIcon: <ChromeIcon className="h-4 w-4" />,
+    size: 'xl',
   },
   about: {
     id: 'about',
@@ -84,6 +105,8 @@ export const WINDOW_META: Record<WindowId, WindowMeta> = {
 
 export const DESKTOP_ICON_ORDER: WindowId[] = [
   'readme',
+  'terminal',
+  'chrome',
   'about',
   'projects',
   'tech',

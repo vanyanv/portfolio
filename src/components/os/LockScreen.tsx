@@ -3,9 +3,9 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSession } from './state/session';
-import { SessionAura3D } from './SessionAura3D';
 import { Wallpaper } from './Wallpaper';
 import { cn } from '@/lib/cn';
+import { LazySessionAura3D } from './LazySessionAura3D';
 
 export function LockScreen() {
   const { unlock } = useSession();
@@ -55,9 +55,9 @@ export function LockScreen() {
         'transition-opacity duration-300',
         closing ? 'opacity-0' : 'opacity-100',
       )}
-    >
+      >
       <Wallpaper />
-      <SessionAura3D variant="lock" />
+      <LazySessionAura3D variant="lock" />
 
       <div
         aria-hidden
@@ -73,7 +73,7 @@ export function LockScreen() {
           <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-fg-2 drop-shadow-[0_1px_12px_rgba(0,0,0,0.32)]">
             Vanyan-OS
           </p>
-          <time className="mt-4 block text-[72px] font-light leading-none text-fg-0 tabular-nums drop-shadow-[0_8px_30px_rgba(0,0,0,0.36)] sm:text-[96px] lg:text-[112px]">
+          <time className="mt-4 block text-[clamp(2.875rem,12vw,7rem)] font-light leading-none text-fg-0 tabular-nums drop-shadow-[0_8px_30px_rgba(0,0,0,0.36)]">
             {time}
           </time>
           <p className="mt-4 text-[15px] font-medium text-fg-1 drop-shadow-[0_2px_12px_rgba(0,0,0,0.34)] sm:text-[17px]">
@@ -84,7 +84,7 @@ export function LockScreen() {
         <section className="flex w-full max-w-[320px] flex-col items-center pb-[8vh]">
           <div className="relative h-20 w-20 overflow-hidden rounded-full border border-fg-0/20 bg-mica-strong shadow-floating backdrop-blur-xl">
             <Image
-              src="/Images/Vardan.png"
+              src="/Images/optimized/vardan-avatar.webp"
               alt="Vardan Vanyan"
               fill
               sizes="80px"

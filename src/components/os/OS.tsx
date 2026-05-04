@@ -1,37 +1,43 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { useEffect, useRef } from 'react';
 import { PreferencesProvider } from './state/preferences';
+import { BrowserProvider } from './state/browser';
 import { SessionProvider, useSession } from './state/session';
-import { WindowManagerProvider } from './state/window-manager';
+import { WindowManagerProvider, useWindowManager } from './state/window-manager';
 import { Desktop } from './Desktop';
 import { BootSequence } from './BootSequence';
 import { LockScreen } from './LockScreen';
-import type { WindowId } from './state/types';
 
-type Props = {
-  contents: Record<WindowId, ReactNode>;
-};
-
-export function OS({ contents }: Props) {
+export function OS() {
   return (
     <PreferencesProvider>
       <SessionProvider>
         <WindowManagerProvider>
-          <SessionShell contents={contents} />
+          <BrowserProvider>
+            <SessionShell />
+          </BrowserProvider>
         </WindowManagerProvider>
       </SessionProvider>
     </PreferencesProvider>
   );
 }
 
-function SessionShell({ contents }: Props) {
+function SessionShell() {
   const { phase } = useSession();
+  const { open } = useWindowManager();
+  const openedIntro = useRef(false);
+
+  useEffect(() => {
+    if (phase !== 'unlocked' || openedIntro.current) return;
+    openedIntro.current = true;
+    open('readme');
+  }, [open, phase]);
 
   return (
     <>
       {/* Always render desktop so background work (font load, etc.) is ready */}
-      <Desktop contents={contents} />
+      <Desktop />
       {phase === 'locked' && <LockScreen />}
       {phase === 'booting' && <BootSequence />}
     </>

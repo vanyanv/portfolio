@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, type ReactNode } from 'react';
+import { useBrowser } from './state/browser';
 import { useWindowManager } from './state/window-manager';
 import {
   ExternalIcon,
@@ -10,7 +11,6 @@ import {
   PdfIcon,
   SunIcon,
 } from './icons';
-import { openExternalShortcut } from './shortcuts';
 import { cn } from '@/lib/cn';
 
 type Props = {
@@ -53,6 +53,7 @@ type WeatherWidgetData = {
 
 export function WidgetsPanel({ open, onClose }: Props) {
   const { open: openWindow } = useWindowManager();
+  const { openBrowser } = useBrowser();
   const [now, setNow] = useState<Date | null>(null);
   const [github, setGithub] = useState<LoadState<GithubWidgetData>>({
     status: 'idle',
@@ -167,18 +168,18 @@ export function WidgetsPanel({ open, onClose }: Props) {
                 <QuickLink
                   icon={<GithubAppIcon className="h-6 w-6" />}
                   label="GitHub"
-                  onClick={() =>
-                    openExternalShortcut('https://github.com/vanyanv')
-                  }
+                  onClick={() => {
+                    openBrowser('github');
+                    onClose();
+                  }}
                 />
                 <QuickLink
                   icon={<LinkedinAppIcon className="h-6 w-6" />}
                   label="LinkedIn"
-                  onClick={() =>
-                    openExternalShortcut(
-                      'https://www.linkedin.com/in/vardanvanyan/',
-                    )
-                  }
+                  onClick={() => {
+                    openBrowser('linkedin');
+                    onClose();
+                  }}
                 />
               </div>
             </section>

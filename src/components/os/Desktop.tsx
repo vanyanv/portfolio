@@ -1,21 +1,17 @@
 'use client';
 
-import type { ReactNode } from 'react';
 import { Wallpaper } from './Wallpaper';
 import { DesktopIcon } from './DesktopIcon';
 import { WindowLayer } from './WindowLayer';
 import { Taskbar } from './Taskbar';
 import { DeepLinkOpener } from './DeepLinkOpener';
-import type { WindowId } from './state/types';
+import { useBrowser } from './state/browser';
 import { useWindowManager } from './state/window-manager';
 import { DESKTOP_SHORTCUTS, runShortcut } from './shortcuts';
 
-type Props = {
-  contents: Record<WindowId, ReactNode>;
-};
-
-export function Desktop({ contents }: Props) {
+export function Desktop() {
   const { open } = useWindowManager();
+  const { openBrowser } = useBrowser();
 
   return (
     <main className="relative h-[100dvh] w-full overflow-hidden font-sans">
@@ -31,13 +27,15 @@ export function Desktop({ contents }: Props) {
               key={shortcut.id}
               label={shortcut.label}
               icon={shortcut.desktopIcon}
-              onOpen={(origin) => runShortcut(shortcut.action, open, origin)}
+              onOpen={(origin) =>
+                runShortcut(shortcut.action, open, openBrowser, origin)
+              }
             />
           );
         })}
       </section>
 
-      <WindowLayer contents={contents} />
+      <WindowLayer />
 
       <Taskbar />
       <DeepLinkOpener />
