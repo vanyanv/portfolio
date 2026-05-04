@@ -1,18 +1,22 @@
-import ContactMe from '@/components/ContactMe';
-import Hero from '@/components/Hero';
-import Navbar from '@/components/Navbar';
-import Projects from '@/components/Projects';
-import ScrollToTopButton from '@/components/ScrollToTopButton';
-import TechStack from '@/components/TechStack';
+import { OS } from '@/components/os/OS';
+import { AboutWindowContent } from '@/components/os/windows/AboutWindow';
+import { ContactWindowContent } from '@/components/os/windows/ContactWindow';
+import { ProjectsWindowContent } from '@/components/os/windows/ProjectsWindow';
+import { ReadmeWindowContent } from '@/components/os/windows/ReadmeWindow';
+import { ResumeWindowContent } from '@/components/os/windows/ResumeWindow';
+import { TechWindowContent } from '@/components/os/windows/TechWindow';
+
 export default function Home() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <TechStack />
-      {/* <Projects /> */}
-      <ScrollToTopButton />
-      <ContactMe />
-    </>
+    <OS
+      contents={{
+        readme: <ReadmeWindowContent />,
+        about: <AboutWindowContent />,
+        projects: <ProjectsWindowContent />,
+        tech: <TechWindowContent />,
+        resume: <ResumeWindowContent />,
+        contact: <ContactWindowContent />,
+      }}
+    />
   );
 }
