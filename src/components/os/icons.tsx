@@ -1,9 +1,11 @@
 /*
  * Inline SVG icons. Tiny, no library, tree-shakable.
  * All icons inherit currentColor and use stroke for line weight consistency.
+ * App icons use local Icons8 PNGs and intentionally skip Next image optimization.
  */
+/* eslint-disable @next/next/no-img-element */
 
-import type { SVGProps } from 'react';
+import type { ImgHTMLAttributes, SVGProps } from 'react';
 
 const base: SVGProps<SVGSVGElement> = {
   xmlns: 'http://www.w3.org/2000/svg',
@@ -203,357 +205,104 @@ export function VanyanLogo(props: SVGProps<SVGSVGElement>) {
 }
 
 /* ---------------------------------------------------------------- */
-/*  Colorful Fluent-style app icons (48 viewBox, gradients, motion)  */
+/*  Icons8 Windows-style app icons                                  */
 /* ---------------------------------------------------------------- */
 
-const appBase: SVGProps<SVGSVGElement> = {
-  xmlns: 'http://www.w3.org/2000/svg',
-  viewBox: '0 0 48 48',
-  fill: 'none',
-};
+type AppIconProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'alt' | 'src'>;
 
-export function ReadmeAppIcon(props: SVGProps<SVGSVGElement>) {
+function AppImageIcon({
+  alt,
+  className,
+  src,
+  ...props
+}: AppIconProps & { alt: string; src: string }) {
   return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="readme-sheet" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fbfcfd" />
-          <stop offset="1" stopColor="#e7ecf2" />
-        </linearGradient>
-      </defs>
-      <rect x="10" y="8" width="30" height="36" rx="2.5" fill="oklch(0.35 0.06 240 / 0.22)" />
-      <path
-        d="M8 5 h26 l6 6 v28 a2 2 0 0 1 -2 2 H10 a2 2 0 0 1 -2 -2 V7 a2 2 0 0 1 2 -2 z"
-        fill="url(#readme-sheet)"
-        stroke="oklch(0.7 0.03 240)"
-        strokeWidth="0.6"
-      />
-      <path d="M34 5 v6 h6" fill="oklch(0.84 0.03 240)" stroke="oklch(0.6 0.04 240)" strokeWidth="0.6" />
-      <line x1="13" y1="20" x2="35" y2="20" stroke="oklch(0.55 0.18 240)" strokeWidth="1.6" strokeLinecap="round" />
-      <line x1="13" y1="25" x2="32" y2="25" stroke="oklch(0.55 0.18 240)" strokeWidth="1.6" strokeLinecap="round" />
-      <line x1="13" y1="30" x2="35" y2="30" stroke="oklch(0.55 0.18 240)" strokeWidth="1.6" strokeLinecap="round" />
-      <line x1="13" y1="35" x2="27" y2="35" stroke="oklch(0.55 0.18 240)" strokeWidth="1.6" strokeLinecap="round" />
-      <line className="icon-caret" x1="28.6" y1="33.2" x2="28.6" y2="37" stroke="oklch(0.45 0.22 240)" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-export function CodeAppIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="vscode-body" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.68 0.19 235)" />
-          <stop offset="1" stopColor="oklch(0.48 0.22 250)" />
-        </linearGradient>
-        <linearGradient id="vscode-ribbon" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.78 0.15 225)" />
-          <stop offset="1" stopColor="oklch(0.58 0.2 245)" />
-        </linearGradient>
-      </defs>
-      <rect x="6" y="6" width="36" height="36" rx="8" fill="oklch(0.27 0.09 250 / 0.24)" />
-      <path
-        className="icon-link-tilt"
-        d="M37 9.5 20.8 24 37 38.5c1.8 1.6 4.6.35 4.6-2.1V11.6c0-2.45-2.8-3.7-4.6-2.1z"
-        fill="url(#vscode-body)"
-      />
-      <path
-        d="M20.8 24 10.7 33.1c-1 .9-2.55.85-3.45-.15L4.6 30c-.82-.9-.76-2.3.15-3.1L13.2 19 4.75 11.1c-.9-.85-.97-2.25-.15-3.15l2.65-2.9c.9-1 2.45-1.05 3.45-.15L20.8 14 29.3 6.45c1.35-1.2 3.5-.25 3.5 1.55v32c0 1.8-2.15 2.75-3.5 1.55z"
-        fill="url(#vscode-ribbon)"
-      />
-      <path
-        d="M20.8 14v20L32.8 24z"
-        fill="oklch(0.42 0.18 250 / 0.42)"
-      />
-      <path
-        d="M13.2 19 20.8 24 13.2 29"
-        stroke="oklch(0.98 0.01 235 / 0.82)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-export function TerminalAppIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="terminal-body" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.24 0.035 150)" />
-          <stop offset="1" stopColor="oklch(0.16 0.025 210)" />
-        </linearGradient>
-      </defs>
-      <rect x="5" y="8" width="38" height="32" rx="6" fill="oklch(0 0 0 / 0.24)" />
-      <rect x="5" y="6" width="38" height="32" rx="6" fill="url(#terminal-body)" />
-      <rect x="5" y="6" width="38" height="8" rx="6" fill="oklch(0.98 0.01 150 / 0.12)" />
-      <circle cx="12" cy="10" r="1.5" fill="oklch(0.72 0.16 30)" />
-      <circle cx="17" cy="10" r="1.5" fill="oklch(0.78 0.16 90)" />
-      <circle cx="22" cy="10" r="1.5" fill="oklch(0.74 0.18 150)" />
-      <path
-        className="icon-caret"
-        d="M13 22l5 4-5 4M21 30h11"
-        stroke="oklch(0.78 0.18 150)"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-export function ChromeAppIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="chrome-red" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.72 0.2 30)" />
-          <stop offset="1" stopColor="oklch(0.62 0.22 20)" />
-        </linearGradient>
-        <linearGradient id="chrome-green" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.78 0.18 145)" />
-          <stop offset="1" stopColor="oklch(0.58 0.18 155)" />
-        </linearGradient>
-        <linearGradient id="chrome-yellow" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.86 0.16 85)" />
-          <stop offset="1" stopColor="oklch(0.72 0.17 75)" />
-        </linearGradient>
-      </defs>
-      <circle cx="24" cy="25" r="19" fill="oklch(0 0 0 / 0.2)" />
-      <path d="M24 5a19 19 0 0 1 16.4 9.5H24a9.5 9.5 0 0 0-8.2 4.75L8.1 5.9A18.9 18.9 0 0 1 24 5z" fill="url(#chrome-red)" />
-      <path d="M40.4 14.5A19 19 0 0 1 24 43l8.2-14.25A9.5 9.5 0 0 0 24 14.5z" fill="url(#chrome-green)" />
-      <path d="M24 43A19 19 0 0 1 8.1 5.9l7.7 13.35A9.5 9.5 0 0 0 24 33.5z" fill="url(#chrome-yellow)" />
-      <circle cx="24" cy="24" r="9.5" fill="oklch(0.98 0.01 240)" />
-      <circle className="icon-about-grad" cx="24" cy="24" r="5.7" fill="oklch(0.68 0.18 240)" />
-    </svg>
-  );
-}
-
-export function AboutAppIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="about-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.72 0.22 290)" />
-          <stop offset="1" stopColor="oklch(0.7 0.2 345)" />
-        </linearGradient>
-        <clipPath id="about-clip">
-          <circle cx="24" cy="24" r="18" />
-        </clipPath>
-      </defs>
-      <circle cx="24" cy="26" r="18" fill="oklch(0.4 0.12 320 / 0.22)" />
-      <g clipPath="url(#about-clip)">
-        <circle className="icon-about-grad" cx="24" cy="24" r="18" fill="url(#about-grad)" />
-        <circle cx="24" cy="21" r="5.4" fill="#fff" opacity="0.96" />
-        <ellipse cx="24" cy="41" rx="12" ry="9" fill="#fff" opacity="0.96" />
-      </g>
-      <circle cx="24" cy="24" r="18" fill="none" stroke="oklch(1 0 0 / 0.25)" strokeWidth="0.8" />
-    </svg>
-  );
-}
-
-export function ProjectsAppIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="proj-back" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="oklch(0.78 0.16 75)" />
-          <stop offset="1" stopColor="oklch(0.62 0.18 65)" />
-        </linearGradient>
-        <linearGradient id="proj-front" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="oklch(0.86 0.16 85)" />
-          <stop offset="1" stopColor="oklch(0.7 0.18 75)" />
-        </linearGradient>
-      </defs>
-      {/* back tab */}
-      <path
-        d="M5 14 a3 3 0 0 1 3 -3 h11 l4 4 h17 a3 3 0 0 1 3 3 V37 a3 3 0 0 1 -3 3 H8 a3 3 0 0 1 -3 -3 z"
-        fill="url(#proj-back)"
-      />
-      {/* peeking page */}
-      <rect x="11" y="16" width="26" height="20" rx="1.5" fill="#fff" opacity="0.85" />
-      <line x1="14" y1="22" x2="34" y2="22" stroke="oklch(0.7 0.02 80)" strokeWidth="1" strokeLinecap="round" />
-      <line x1="14" y1="26" x2="30" y2="26" stroke="oklch(0.7 0.02 80)" strokeWidth="1" strokeLinecap="round" />
-      <line x1="14" y1="30" x2="32" y2="30" stroke="oklch(0.7 0.02 80)" strokeWidth="1" strokeLinecap="round" />
-      {/* front face / lid (rotates on hover) */}
-      <path
-        className="icon-folder-lid"
-        d="M5 22 h38 V37 a3 3 0 0 1 -3 3 H8 a3 3 0 0 1 -3 -3 z"
-        fill="url(#proj-front)"
-      />
-    </svg>
-  );
-}
-
-export function AppsAppIcon(props: SVGProps<SVGSVGElement>) {
-  const tile = (x: number, y: number, fill: string, n: number) => (
-    <rect
-      className={`icon-tile icon-tile-${n}`}
-      x={x}
-      y={y}
-      width="16"
-      height="16"
-      rx="3"
-      fill={fill}
+    <img
+      {...props}
+      src={src}
+      alt={alt}
+      className={className}
+      draggable={false}
     />
   );
+}
+
+export function ReadmeAppIcon(props: AppIconProps) {
+  return <CodeAppIcon {...props} />;
+}
+
+export function CodeAppIcon(props: AppIconProps) {
   return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="tile-r" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.72 0.2 25)" />
-          <stop offset="1" stopColor="oklch(0.6 0.22 25)" />
-        </linearGradient>
-        <linearGradient id="tile-b" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.7 0.18 240)" />
-          <stop offset="1" stopColor="oklch(0.58 0.2 245)" />
-        </linearGradient>
-        <linearGradient id="tile-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.78 0.18 145)" />
-          <stop offset="1" stopColor="oklch(0.62 0.2 150)" />
-        </linearGradient>
-        <linearGradient id="tile-y" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.85 0.16 80)" />
-          <stop offset="1" stopColor="oklch(0.72 0.18 75)" />
-        </linearGradient>
-      </defs>
-      {tile(6, 6, 'url(#tile-r)', 1)}
-      {tile(26, 6, 'url(#tile-b)', 2)}
-      {tile(6, 26, 'url(#tile-g)', 3)}
-      {tile(26, 26, 'url(#tile-y)', 4)}
-      {/* tiny glyphs inside each tile for personality */}
-      <circle cx="14" cy="14" r="2.2" fill="#fff" opacity="0.9" />
-      <rect x="31" y="11" width="6" height="6" rx="1" fill="#fff" opacity="0.9" />
-      <path d="M11 35 l3 -4 l3 4 z" fill="#fff" opacity="0.9" />
-      <path d="M30 31 h6 v6 h-6 z m1.5 1.5 v3 h3 v-3z" fill="#fff" opacity="0.9" />
-    </svg>
+    <AppImageIcon
+      {...props}
+      src="/Icons/os/vscode.png"
+      alt="Visual Studio Code icon"
+    />
   );
 }
 
-export function ResumeAppIcon(props: SVGProps<SVGSVGElement>) {
+export function TerminalAppIcon(props: AppIconProps) {
   return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="resume-body" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="oklch(0.66 0.2 25)" />
-          <stop offset="1" stopColor="oklch(0.55 0.22 25)" />
-        </linearGradient>
-      </defs>
-      <rect x="10" y="8" width="30" height="36" rx="2.5" fill="oklch(0.35 0.1 25 / 0.22)" />
-      <path
-        d="M8 5 h22 l10 10 v24 a2 2 0 0 1 -2 2 H10 a2 2 0 0 1 -2 -2 V7 a2 2 0 0 1 2 -2 z"
-        fill="url(#resume-body)"
-      />
-      {/* subtle text lines */}
-      <line x1="13" y1="20" x2="34" y2="20" stroke="#fff" strokeOpacity="0.45" strokeWidth="1.4" strokeLinecap="round" />
-      <line x1="13" y1="24" x2="30" y2="24" stroke="#fff" strokeOpacity="0.35" strokeWidth="1.4" strokeLinecap="round" />
-      <line x1="13" y1="28" x2="33" y2="28" stroke="#fff" strokeOpacity="0.3" strokeWidth="1.4" strokeLinecap="round" />
-      {/* PDF pill */}
-      <rect x="11" y="33" width="15" height="7" rx="1.5" fill="#fff" />
-      <text x="18.5" y="38.4" textAnchor="middle" fontFamily="ui-sans-serif, system-ui" fontSize="5" fontWeight="700" fill="oklch(0.5 0.22 25)" letterSpacing="0.5">
-        PDF
-      </text>
-      {/* folded corner (lifts on hover) */}
-      <path
-        className="icon-pdf-corner"
-        d="M30 5 v10 h10 z"
-        fill="oklch(0.85 0.08 25)"
-      />
-      <path d="M30 5 v10 h10" stroke="oklch(0.45 0.18 25)" strokeWidth="0.6" fill="none" />
-    </svg>
+    <AppImageIcon
+      {...props}
+      src="/Icons/os/terminal.png"
+      alt="Terminal icon"
+    />
   );
 }
 
-export function ContactAppIcon(props: SVGProps<SVGSVGElement>) {
+export function ChromeAppIcon(props: AppIconProps) {
   return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="env-body" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="oklch(0.7 0.18 245)" />
-          <stop offset="1" stopColor="oklch(0.55 0.2 250)" />
-        </linearGradient>
-        <linearGradient id="env-flap" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="oklch(0.78 0.15 240)" />
-          <stop offset="1" stopColor="oklch(0.62 0.2 248)" />
-        </linearGradient>
-      </defs>
-      <rect x="6" y="13" width="36" height="28" rx="3" fill="oklch(0.3 0.1 250 / 0.22)" />
-      {/* body */}
-      <rect x="5" y="11" width="38" height="28" rx="3" fill="url(#env-body)" />
-      {/* letter peeking */}
-      <rect x="11" y="9" width="26" height="18" rx="1.5" fill="#fff" opacity="0.95" />
-      <line x1="14" y1="14" x2="32" y2="14" stroke="oklch(0.7 0.04 250)" strokeWidth="1" strokeLinecap="round" />
-      <line x1="14" y1="17" x2="28" y2="17" stroke="oklch(0.7 0.04 250)" strokeWidth="1" strokeLinecap="round" />
-      <line x1="14" y1="20" x2="30" y2="20" stroke="oklch(0.7 0.04 250)" strokeWidth="1" strokeLinecap="round" />
-      {/* flap (rotates open on hover) */}
-      <path
-        className="icon-envelope-flap"
-        d="M5 11 L 24 26 L 43 11 z"
-        fill="url(#env-flap)"
-      />
-      {/* unread badge */}
-      <circle className="icon-badge" cx="38" cy="11" r="5.5" fill="oklch(0.65 0.22 25)" stroke="#fff" strokeWidth="1.2" />
-      <text x="38" y="13.2" textAnchor="middle" fontFamily="ui-sans-serif, system-ui" fontSize="6.5" fontWeight="700" fill="#fff">
-        1
-      </text>
-    </svg>
+    <AppImageIcon {...props} src="/Icons/os/chrome.png" alt="Chrome icon" />
   );
 }
 
-export function GithubAppIcon(props: SVGProps<SVGSVGElement>) {
+export function AboutAppIcon(props: AppIconProps) {
   return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="gh-body" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.32 0.025 270)" />
-          <stop offset="1" stopColor="oklch(0.18 0.02 270)" />
-        </linearGradient>
-      </defs>
-      <g className="icon-link-tilt">
-        <rect x="6" y="6" width="36" height="36" rx="8" fill="url(#gh-body)" />
-        {/* git-fork glyph: three nodes, two connecting lines */}
-        <circle cx="17" cy="16" r="2.6" fill="#fff" />
-        <circle cx="31" cy="16" r="2.6" fill="#fff" />
-        <circle cx="24" cy="33" r="2.6" fill="#fff" />
-        <path d="M17 18.6 V24 a2 2 0 0 0 2 2 h10 a2 2 0 0 0 2 -2 V18.6" stroke="#fff" strokeWidth="2.2" fill="none" strokeLinecap="round" />
-        <line x1="24" y1="26" x2="24" y2="30.4" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" />
-      </g>
-      {/* shortcut badge */}
-      <g>
-        <rect x="2" y="32" width="14" height="14" rx="3" fill="#fff" stroke="oklch(0.65 0.02 270)" strokeWidth="0.6" />
-        <path d="M6 42 L13 35 M13 35 H8 M13 35 V40" stroke="oklch(0.4 0.04 270)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      </g>
-    </svg>
+    <AppImageIcon {...props} src="/Icons/os/about.png" alt="Profile icon" />
   );
 }
 
-export function LinkedinAppIcon(props: SVGProps<SVGSVGElement>) {
+export function ProjectsAppIcon(props: AppIconProps) {
   return (
-    <svg {...appBase} {...props}>
-      <defs>
-        <linearGradient id="li-body" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.62 0.16 245)" />
-          <stop offset="1" stopColor="oklch(0.5 0.18 250)" />
-        </linearGradient>
-      </defs>
-      <g className="icon-link-tilt">
-        <rect x="6" y="6" width="36" height="36" rx="8" fill="url(#li-body)" />
-        {/* dot of "i" */}
-        <circle cx="15" cy="15.5" r="2.4" fill="#fff" />
-        {/* stem of "i" */}
-        <rect x="12.8" y="20" width="4.4" height="14" rx="0.8" fill="#fff" />
-        {/* "n" */}
-        <path
-          d="M21 20 h4.4 v2 c1 -1.6 2.6 -2.4 4.6 -2.4 c3.4 0 5 2.2 5 5.6 V34 h-4.4 V26.2 c0 -1.6 -0.6 -2.6 -2.2 -2.6 c-1.8 0 -3 1.2 -3 3.2 V34 H21 z"
-          fill="#fff"
-        />
-      </g>
-      {/* shortcut badge */}
-      <g>
-        <rect x="2" y="32" width="14" height="14" rx="3" fill="#fff" stroke="oklch(0.65 0.02 250)" strokeWidth="0.6" />
-        <path d="M6 42 L13 35 M13 35 H8 M13 35 V40" stroke="oklch(0.4 0.04 250)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      </g>
-    </svg>
+    <AppImageIcon
+      {...props}
+      src="/Icons/os/projects.png"
+      alt="Projects folder icon"
+    />
+  );
+}
+
+export function AppsAppIcon(props: AppIconProps) {
+  return (
+    <AppImageIcon
+      {...props}
+      src="/Icons/os/apps.png"
+      alt="Installed apps icon"
+    />
+  );
+}
+
+export function ResumeAppIcon(props: AppIconProps) {
+  return (
+    <AppImageIcon {...props} src="/Icons/os/resume.png" alt="Resume PDF icon" />
+  );
+}
+
+export function ContactAppIcon(props: AppIconProps) {
+  return (
+    <AppImageIcon {...props} src="/Icons/os/contact.png" alt="Contact icon" />
+  );
+}
+
+export function GithubAppIcon(props: AppIconProps) {
+  return (
+    <AppImageIcon {...props} src="/Icons/os/github.png" alt="GitHub icon" />
+  );
+}
+
+export function LinkedinAppIcon(props: AppIconProps) {
+  return (
+    <AppImageIcon {...props} src="/Icons/os/linkedin.png" alt="LinkedIn icon" />
   );
 }
