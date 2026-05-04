@@ -1,7 +1,9 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSession } from './state/session';
+import { SessionAura3D } from './SessionAura3D';
 import { Wallpaper } from './Wallpaper';
 import { cn } from '@/lib/cn';
 
@@ -49,48 +51,79 @@ export function LockScreen() {
       role="dialog"
       aria-label="Lock screen — sign in to continue"
       className={cn(
-        'fixed inset-0 z-[90] flex flex-col items-center justify-center gap-12',
+        'fixed inset-0 isolate z-[90] overflow-hidden',
         'transition-opacity duration-300',
         closing ? 'opacity-0' : 'opacity-100',
       )}
     >
       <Wallpaper />
+      <SessionAura3D variant="lock" />
 
-      {/* Clock + date */}
-      <div className="text-center">
-        <div className="text-[88px] font-light leading-none tracking-tight text-fg-0 tabular-nums drop-shadow-[0_2px_24px_rgba(0,0,0,0.4)]">
-          {time}
-        </div>
-        <div className="mt-2 text-[15px] font-medium tracking-wide text-fg-1 drop-shadow-[0_1px_8px_rgba(0,0,0,0.4)]">
-          {date}
-        </div>
-      </div>
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-[1]"
+        style={{
+          background:
+            'linear-gradient(180deg, oklch(0.05 0.012 var(--accent-h) / 0.3), transparent 34%, oklch(0.05 0.014 var(--accent-h) / 0.42)), linear-gradient(110deg, oklch(0.04 0.014 var(--accent-h) / 0.18), transparent 48%, oklch(0.08 0.025 var(--accent-h) / 0.22))',
+        }}
+      />
 
-      {/* Avatar + sign in */}
-      <div className="flex flex-col items-center gap-3">
-        <div
-          className="flex h-16 w-16 items-center justify-center rounded-full border border-hairline bg-mica-strong text-2xl font-semibold text-fg-0"
-        >
-          V
-        </div>
-        <p className="text-[13px] font-medium text-fg-0">Vardan</p>
-        <button
-          type="button"
-          onClick={handleUnlock}
-          autoFocus
-          className={cn(
-            'mt-1 rounded-chrome border border-hairline bg-mica-strong px-6 py-2',
-            'text-[13px] font-medium text-fg-0',
-            'hover:bg-accent hover:border-accent hover:text-white transition-colors',
-            'focus-visible:bg-accent focus-visible:border-accent focus-visible:text-white',
-          )}
-        >
-          Sign in
-        </button>
-        <p className="mt-1 text-[11px] tracking-wide text-fg-2">
-          Press Enter or click to continue
-        </p>
-      </div>
+      <main className="relative z-10 flex min-h-[100dvh] w-full flex-col items-center justify-between px-6 py-8 text-center sm:px-10 sm:py-10">
+        <section className="pt-[8vh]">
+          <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-fg-2 drop-shadow-[0_1px_12px_rgba(0,0,0,0.32)]">
+            Vanyan-OS
+          </p>
+          <time className="mt-4 block text-[72px] font-light leading-none text-fg-0 tabular-nums drop-shadow-[0_8px_30px_rgba(0,0,0,0.36)] sm:text-[96px] lg:text-[112px]">
+            {time}
+          </time>
+          <p className="mt-4 text-[15px] font-medium text-fg-1 drop-shadow-[0_2px_12px_rgba(0,0,0,0.34)] sm:text-[17px]">
+            {date}
+          </p>
+        </section>
+
+        <section className="flex w-full max-w-[320px] flex-col items-center pb-[8vh]">
+          <div className="relative h-20 w-20 overflow-hidden rounded-full border border-fg-0/20 bg-mica-strong shadow-floating backdrop-blur-xl">
+            <Image
+              src="/Images/Vardan.png"
+              alt="Vardan Vanyan"
+              fill
+              sizes="80px"
+              className="object-cover"
+              priority
+            />
+          </div>
+
+          <div className="mt-4 min-w-0">
+            <p className="text-[18px] font-semibold text-fg-0 drop-shadow-[0_2px_12px_rgba(0,0,0,0.32)]">
+              Vardan Vanyan
+            </p>
+            <p className="mt-1 text-[12px] font-medium text-fg-2 drop-shadow-[0_1px_8px_rgba(0,0,0,0.28)]">
+              Software Engineer
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleUnlock}
+            autoFocus
+            className={cn(
+              'mt-5 flex h-10 w-full max-w-[220px] items-center justify-center rounded-chrome border border-fg-0/20 bg-mica-strong px-5',
+              'text-[13px] font-semibold text-fg-0 shadow-floating backdrop-blur-xl',
+              'transition-[background,border-color,transform,box-shadow,color] duration-200',
+              'hover:-translate-y-0.5 hover:border-accent/60 hover:bg-accent hover:text-[oklch(0.98_0.005_var(--accent-h))]',
+              'focus-visible:-translate-y-0.5 focus-visible:border-accent/70 focus-visible:bg-accent focus-visible:text-[oklch(0.98_0.005_var(--accent-h))]',
+            )}
+          >
+            Sign in
+          </button>
+
+          <div className="mt-4 flex items-center gap-3 text-[11px] text-fg-2 drop-shadow-[0_1px_8px_rgba(0,0,0,0.24)]">
+            <span>Los Angeles</span>
+            <span className="h-1 w-1 rounded-full bg-fg-2/60" />
+            <span>Ready</span>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

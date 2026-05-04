@@ -1,5 +1,7 @@
 'use client';
 
+import { SessionAura3D } from './SessionAura3D';
+import { Wallpaper } from './Wallpaper';
 import { VanyanLogo } from './icons';
 
 export function BootSequence() {
@@ -8,14 +10,21 @@ export function BootSequence() {
       role="status"
       aria-label="Booting"
       aria-live="polite"
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-8"
-      style={{ background: 'oklch(0.08 0.02 var(--accent-h))' }}
+      className="fixed inset-0 isolate z-[100] flex flex-col items-center justify-center gap-8 overflow-hidden"
     >
-      <div className="animate-boot-pulse text-fg-0">
+      <Wallpaper />
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{ background: 'oklch(0.08 0.02 var(--accent-h) / 0.88)' }}
+      />
+      <SessionAura3D variant="boot" />
+
+      <div className="relative z-10 animate-boot-pulse text-fg-0 drop-shadow-[0_0_28px_oklch(0.66_0.22_var(--accent-h)_/_0.42)]">
         <VanyanLogo className="h-16 w-16" />
       </div>
       <BootSpinner />
-      <p className="text-[11px] uppercase tracking-[0.3em] text-fg-2">
+      <p className="relative z-10 text-[11px] uppercase tracking-[0.3em] text-fg-2">
         Vanyan-OS
       </p>
     </div>
@@ -26,7 +35,7 @@ function BootSpinner() {
   return (
     <div
       aria-hidden
-      className="flex gap-1.5"
+      className="relative z-10 flex gap-1.5"
     >
       {[0, 1, 2, 3, 4].map((i) => (
         <span
