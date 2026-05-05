@@ -90,7 +90,7 @@ export function ContactWindowContent() {
 
 function ContactIcon({ label }: { label: Contact['label'] }) {
   return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-chrome border border-hairline/60 bg-bg-1/40 text-accent">
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-chrome border border-hairline/60 bg-bg-1 text-accent">
       {label === 'Email' ? (
         <MailIcon className="h-5 w-5" />
       ) : label === 'GitHub' ? (

@@ -31,7 +31,7 @@ export function ChromeWindowContent() {
 
   return (
     <section className="flex h-full min-h-0 flex-col bg-bg-0 text-fg-0">
-      <div className="border-b border-hairline/70 bg-bg-1/80">
+      <div className="border-b border-hairline/70 bg-bg-1">
         <div className="flex h-9 items-end gap-1 px-2 pt-1">
           {(Object.keys(PAGES) as BrowserPage[]).map((id) => {
             const tab = PAGES[id];
@@ -44,7 +44,7 @@ export function ChromeWindowContent() {
                   'flex h-8 min-w-[128px] max-w-[180px] items-center gap-2 rounded-t-chrome px-3 text-[12px] transition-colors',
                   activePage === id
                     ? 'bg-bg-0 text-fg-0'
-                    : 'bg-bg-2/45 text-fg-2 hover:bg-bg-2 hover:text-fg-0',
+                    : 'bg-bg-2 text-fg-2 hover:bg-bg-2 hover:text-fg-0',
                 )}
               >
                 {id === 'github' ? (
@@ -62,7 +62,7 @@ export function ChromeWindowContent() {
           <BrowserButton label="Back">&lt;</BrowserButton>
           <BrowserButton label="Forward">&gt;</BrowserButton>
           <BrowserButton label="Reload">R</BrowserButton>
-          <div className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-hairline/70 bg-bg-0/70 px-3 py-1.5 text-[12px] text-fg-1">
+          <div className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-hairline/70 bg-bg-0 px-3 py-1.5 text-[12px] text-fg-1">
             <span className="text-[10px] text-accent">lock</span>
             <span className="truncate">{page.url}</span>
           </div>
@@ -168,7 +168,7 @@ function GitHubPreview() {
             {repos.map((repo) => (
               <article
                 key={repo.name}
-                className="rounded-window border border-hairline bg-bg-1/60 p-4"
+                className="rounded-window border border-hairline bg-bg-1 p-4"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
@@ -203,7 +203,7 @@ function LinkedInPreview() {
 
   return (
     <main className="mx-auto max-w-4xl px-5 py-6">
-      <section className="overflow-hidden rounded-window border border-hairline bg-bg-1/70">
+      <section className="overflow-hidden rounded-window border border-hairline bg-bg-1">
         <div className="h-32 bg-[linear-gradient(135deg,oklch(0.66_0.18_245),oklch(0.72_0.16_150))]" />
         <div className="px-5 pb-5">
           <div className="-mt-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -242,7 +242,7 @@ function LinkedInPreview() {
             {highlights.map((item) => (
               <span
                 key={item}
-                className="rounded-full border border-hairline bg-bg-0/60 px-3 py-1 text-[12px] text-fg-1"
+                className="rounded-full border border-hairline bg-bg-0 px-3 py-1 text-[12px] text-fg-1"
               >
                 {item}
               </span>
@@ -273,7 +273,7 @@ function InfoPanel({
   children: React.ReactNode;
 }) {
   return (
-    <article className="rounded-window border border-hairline bg-bg-1/55 p-4">
+    <article className="rounded-window border border-hairline bg-bg-1 p-4">
       <h2 className="text-[13px] font-semibold text-fg-0">{title}</h2>
       <p className="mt-2 text-[13px] leading-6 text-fg-1">{children}</p>
     </article>

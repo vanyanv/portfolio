@@ -22,9 +22,9 @@
   --border: oklch(0.85 0.01 var(--accent-h) / 0.6);
   --hairline: oklch(0.75 0.01 var(--accent-h) / 0.45);
 
-  /* Mica surface — translucent, sits over the wallpaper */
-  --mica: oklch(0.99 0.005 var(--accent-h) / 0.78);
-  --mica-strong: oklch(0.99 0.005 var(--accent-h) / 0.92);
+  /* Mica surface — lightly atmospheric, but solid enough for readable panels */
+  --mica: oklch(0.99 0.005 var(--accent-h) / 0.94);
+  --mica-strong: oklch(0.99 0.005 var(--accent-h) / 0.98);
   --mica-fallback: oklch(0.96 0.01 var(--accent-h));
 
   /* State color — coral, used only for notifications/state */
@@ -53,8 +53,8 @@
   --border: oklch(0.4 0.018 var(--accent-h) / 0.5);
   --hairline: oklch(0.5 0.015 var(--accent-h) / 0.35);
 
-  --mica: oklch(0.18 0.02 var(--accent-h) / 0.72);
-  --mica-strong: oklch(0.18 0.02 var(--accent-h) / 0.88);
+  --mica: oklch(0.18 0.02 var(--accent-h) / 0.94);
+  --mica-strong: oklch(0.18 0.02 var(--accent-h) / 0.98);
   --mica-fallback: oklch(0.2 0.018 var(--accent-h));
 
   --os-shadow-window:

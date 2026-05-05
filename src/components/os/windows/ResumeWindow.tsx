@@ -28,7 +28,7 @@ export function ResumeWindowContent() {
         </div>
       </header>
 
-      <div className="flex-1 overflow-hidden bg-bg-1/30">
+      <div className="flex-1 overflow-hidden bg-bg-1">
         <object
           data={RESUME_PATH}
           type="application/pdf"

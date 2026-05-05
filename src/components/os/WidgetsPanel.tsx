@@ -144,7 +144,7 @@ export function WidgetsPanel({ open, onClose }: Props) {
             <WeatherWidget state={weather} />
             <GithubWidget state={github} />
 
-            <section className="rounded-window border border-hairline/60 bg-bg-1/35 p-3">
+            <section className="rounded-window border border-hairline/60 bg-bg-1 p-3">
               <h3 className="text-[12px] font-semibold text-fg-0">
                 Quick links
               </h3>
@@ -192,7 +192,7 @@ export function WidgetsPanel({ open, onClose }: Props) {
 
 function WeatherWidget({ state }: { state: LoadState<WeatherWidgetData> }) {
   return (
-    <section className="rounded-window border border-hairline/60 bg-bg-1/35 p-3">
+    <section className="rounded-window border border-hairline/60 bg-bg-1 p-3">
       <div className="flex items-start gap-3">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-chrome bg-accent/15 text-accent">
           <SunIcon className="h-5 w-5" />
@@ -229,7 +229,7 @@ function WeatherWidget({ state }: { state: LoadState<WeatherWidgetData> }) {
 
 function GithubWidget({ state }: { state: LoadState<GithubWidgetData> }) {
   return (
-    <section className="rounded-window border border-hairline/60 bg-bg-1/35 p-3">
+    <section className="rounded-window border border-hairline/60 bg-bg-1 p-3">
       <div className="mb-3 flex items-center gap-3">
         <GithubAppIcon className="h-10 w-10 shrink-0" />
         <div className="min-w-0">

@@ -360,7 +360,7 @@ export const Window = forwardRef<HTMLDivElement, Props>(function Window(
               : 'rounded-window mica',
             isFocused
               ? 'border-hairline opacity-100 shadow-window'
-              : 'border-border/40 opacity-90 shadow-floating',
+              : 'border-border/40 opacity-100 shadow-floating',
             closing ? 'animate-window-close' : 'animate-window-open',
           )}
           style={{

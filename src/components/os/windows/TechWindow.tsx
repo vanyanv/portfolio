@@ -35,7 +35,7 @@ export function TechWindowContent() {
             key={tech.name}
             className="flex items-center gap-4 rounded-chrome px-3 py-2.5 hover:bg-fg-0/5 transition-colors"
           >
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-chrome border border-hairline/60 bg-bg-1/30">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-chrome border border-hairline/60 bg-bg-1">
               <Image
                 src={`/Icons/${tech.file}.svg`}
                 alt={tech.name}

@@ -26,7 +26,7 @@ export function ProjectDetailsWindowContent() {
   return (
     <section className="flex h-full min-h-0 flex-col bg-bg-0 text-fg-0">
       <div className="grid min-h-0 flex-1 gap-0 md:grid-cols-[230px_minmax(0,1fr)]">
-        <aside className="hidden border-r border-hairline/60 bg-bg-1/55 p-3 md:block">
+        <aside className="hidden border-r border-hairline/60 bg-bg-1/95 p-3 md:block">
           <p className="mb-2 px-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-2">
             Recent projects
           </p>
@@ -40,7 +40,7 @@ export function ProjectDetailsWindowContent() {
                   'group flex w-full items-center gap-2 rounded-chrome px-2 py-2 text-left text-[12px] transition-colors',
                   item.id === project.id
                     ? 'bg-accent/14 text-accent'
-                    : 'text-fg-1 hover:bg-fg-0/8 hover:text-fg-0',
+                    : 'text-fg-1 hover:bg-fg-0/10 hover:text-fg-0',
                 )}
               >
                 <FolderIcon className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5" />
@@ -56,7 +56,7 @@ export function ProjectDetailsWindowContent() {
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_18%,oklch(0.12_0.015_var(--accent-h)/0.84))]" />
             <div className="absolute inset-x-0 bottom-0 p-5">
               <div className="project-detail-title max-w-2xl">
-                <span className="rounded-full bg-bg-0/78 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+                <span className="rounded-full bg-bg-0/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
                   {project.status} | {project.year}
                 </span>
                 <h1 className="mt-3 text-2xl font-semibold tracking-tight text-[oklch(0.98_0.006_var(--accent-h))] sm:text-3xl">
@@ -83,7 +83,7 @@ export function ProjectDetailsWindowContent() {
                   {project.highlights.map((highlight, index) => (
                     <li
                       key={highlight}
-                      className="project-detail-row flex gap-3 rounded-chrome border border-hairline/55 bg-bg-1/45 px-3 py-2 text-[13px] leading-5 text-fg-1"
+                      className="project-detail-row flex gap-3 rounded-chrome border border-hairline/60 bg-bg-1/95 px-3 py-2 text-[13px] leading-5 text-fg-1"
                       style={{ animationDelay: `${index * 70}ms` }}
                     >
                       <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-accent" />
@@ -101,7 +101,7 @@ export function ProjectDetailsWindowContent() {
                   {project.tech.map((tech, index) => (
                     <span
                       key={tech}
-                      className="project-chip rounded-full border border-hairline/60 bg-bg-1/70 px-3 py-1 text-[12px] font-medium text-fg-1"
+                      className="project-chip rounded-full border border-hairline/60 bg-bg-1 px-3 py-1 text-[12px] font-medium text-fg-1"
                       style={{ animationDelay: `${index * 34}ms` }}
                     >
                       {tech}
@@ -112,7 +112,7 @@ export function ProjectDetailsWindowContent() {
             </section>
 
             <aside className="space-y-3">
-              <div className="rounded-window border border-hairline bg-bg-1/65 p-4">
+              <div className="rounded-window border border-hairline bg-bg-1 p-4">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-2">
                   Role
                 </p>

@@ -84,7 +84,7 @@ export function StartMenu({ open, onClose }: Props) {
       >
         {/* Search */}
         <div className="p-4 pb-3 border-b border-hairline/40">
-          <label className="flex items-center gap-2 rounded-chrome border border-hairline/70 bg-bg-1/40 px-3 py-2 focus-within:border-accent">
+          <label className="flex items-center gap-2 rounded-chrome border border-hairline/70 bg-bg-1 px-3 py-2 focus-within:border-accent">
             <SearchIcon className="h-4 w-4 text-fg-2" />
             <input
               ref={inputRef}

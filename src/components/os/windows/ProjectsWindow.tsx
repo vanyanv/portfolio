@@ -92,7 +92,7 @@ export function ProjectsWindowContent() {
                 <span
                   key={t}
                   title={t}
-                  className="flex h-6 w-6 items-center justify-center rounded bg-bg-1/40"
+                  className="flex h-6 w-6 items-center justify-center rounded bg-bg-1"
                 >
                   {ICON_FILE[t] ? (
                     // eslint-disable-next-line @next/next/no-img-element

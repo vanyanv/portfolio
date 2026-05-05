@@ -135,8 +135,8 @@ const editorOptions: editor.IStandaloneEditorConstructionOptions = {
   fontFamily:
     'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
   fontLigatures: false,
-  fontSize: 12,
-  lineHeight: 22,
+  fontSize: 14,
+  lineHeight: 24,
   minimap: { enabled: false },
   padding: { top: 14, bottom: 14 },
   readOnly: false,
@@ -192,7 +192,7 @@ export function ReadmeWindowContent() {
 
   return (
     <section className="flex h-full min-h-0 flex-col bg-[oklch(0.145_0.025_265)] text-[oklch(0.92_0.01_265)]">
-      <div className="flex h-8 shrink-0 items-center gap-4 border-b border-white/10 bg-[oklch(0.18_0.025_265)] px-3 text-[11px] text-white/62">
+      <div className="flex h-8 shrink-0 items-center gap-4 border-b border-white/10 bg-[oklch(0.18_0.025_265)] px-3 text-[12px] text-white/68">
         <span>File</span>
         <span>Edit</span>
         <span>Selection</span>
@@ -204,11 +204,11 @@ export function ReadmeWindowContent() {
         <ActivityBar />
 
         <aside className="hidden w-52 shrink-0 border-r border-white/10 bg-[oklch(0.165_0.025_265)] sm:block">
-          <div className="border-b border-white/10 px-3 py-2 text-[11px] uppercase tracking-wider text-white/52">
+          <div className="border-b border-white/10 px-3 py-2 text-[12px] uppercase tracking-wider text-white/58">
             Explorer
           </div>
           <div className="px-2 py-2">
-            <p className="px-2 py-1 text-[11px] font-semibold uppercase text-white/70">
+            <p className="px-2 py-1 text-[12px] font-semibold uppercase text-white/74">
               Portfolio
             </p>
             <div className="space-y-0.5">
@@ -218,7 +218,7 @@ export function ReadmeWindowContent() {
                   type="button"
                   onClick={() => openFile(file.id)}
                   className={cn(
-                    'flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-[12px] transition-colors',
+                    'flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-[13px] transition-colors',
                     activeId === file.id
                       ? 'bg-white/10 text-white'
                       : 'text-white/68 hover:bg-white/7 hover:text-white',
@@ -242,7 +242,7 @@ export function ReadmeWindowContent() {
                   type="button"
                   onClick={() => setActiveId(id)}
                   className={cn(
-                    'flex min-w-[130px] items-center gap-2 border-r border-white/10 px-3 text-left text-[12px]',
+                    'flex min-w-[130px] items-center gap-2 border-r border-white/10 px-3 text-left text-[13px]',
                     activeId === id
                       ? 'bg-[oklch(0.145_0.025_265)] text-white'
                       : 'text-white/58 hover:bg-white/5 hover:text-white/82',
@@ -256,7 +256,7 @@ export function ReadmeWindowContent() {
           </div>
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-            <div className="border-b border-white/8 px-4 py-2 text-[11px] text-white/42">
+            <div className="border-b border-white/8 px-4 py-2 text-[12px] text-white/48">
               {activeFile.path}
             </div>
             <div
