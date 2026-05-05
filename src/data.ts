@@ -51,7 +51,7 @@ const Projects: Project[] = [
     status: 'Live',
     featured: true,
     caseStudy:
-      'Graphify mapped the local codebase at 2,040 nodes, 2,440 links, and 54 communities, which matches the real shape of the product: a full-stack operating platform connecting stores, orders, invoices, recipes, vendor prices, ingredients, ratings, P&L, AI tools, and monitoring into one owner-ready workflow.',
+      'A full-stack operating platform connecting stores, orders, invoices, recipes, vendor prices, ingredients, ratings, P&L, AI tools, and monitoring into one owner-ready workflow.',
     highlights: [
       'Owner and manager workflows with account/store scoping, invites, protected routes, desktop dashboards, and mobile routes',
       'Otter, Yelp, Microsoft Graph invoice, R2 PDF, and cron sync pipelines tracked through JobRun monitoring',
