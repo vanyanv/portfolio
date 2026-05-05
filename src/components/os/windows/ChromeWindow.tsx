@@ -106,13 +106,15 @@ function GitHubPreview() {
   const repos = [
     {
       name: 'restaurant-dashboard',
-      description: "Chris n Eddy's operations dashboard.",
-      stack: 'Next.js, TypeScript, Prisma, Recharts',
+      description:
+        "Chris n Eddy's restaurant OS for analytics, COGS, invoices, P&L, syncs, AI chat, and monitoring.",
+      stack: 'Next.js, TypeScript, Prisma, OpenAI',
     },
     {
       name: 'ryddo-catalyst',
-      description: 'BigCommerce Catalyst storefront work.',
-      stack: 'Next.js, TypeScript, GraphQL, BigCommerce',
+      description:
+        "BigCommerce Catalyst storefront customized for RYDDO's electric mobility catalog.",
+      stack: 'Next.js, GraphQL, BigCommerce, Algolia',
     },
     {
       name: 'MicrObserv',

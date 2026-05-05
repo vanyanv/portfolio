@@ -13,12 +13,12 @@ const ART: Record<
   'restaurant-dashboard': {
     label: 'Restaurant OS',
     hue: 45,
-    panels: ['Daily sales', 'Stores', 'Yelp', 'Reports'],
+    panels: ['P&L', 'COGS', 'Invoices', 'AI Chat'],
   },
   'ryddo-catalyst': {
     label: 'RYDDO',
     hue: 170,
-    panels: ['Product', 'Options', 'Cart', 'Checkout'],
+    panels: ['PDP', 'Add-ons', 'Dealers', 'Cart'],
   },
 };
 

@@ -1,5 +1,11 @@
 export type ProjectStatus = 'Live' | 'Case study' | 'Prototype';
 
+export type ProjectArchitectureItem = {
+  title: string;
+  summary: string;
+  evidence: string[];
+};
+
 export type Project = {
   id: string;
   name: string;
@@ -14,41 +20,107 @@ export type Project = {
   featured?: boolean;
   caseStudy: string;
   highlights: string[];
+  architecture?: ProjectArchitectureItem[];
 };
 
 const Projects: Project[] = [
   {
     id: 'restaurant-dashboard',
     name: "Chris n Eddy's Restaurant Dashboard",
-    description: 'Restaurant operations dashboard for reporting, store management, and analytics.',
+    description:
+      'Multi-store restaurant OS for analytics, COGS, invoices, P&L, Otter/Yelp sync, AI chat, and operational monitoring.',
     githubUrl: 'https://github.com/vanyanv/restaurant-dashboard',
     linkUrl: 'https://restaurant-dashboard-five.vercel.app',
     tech: [
       'Nextjs',
       'Typescript',
+      'React',
       'Postgres',
       'Prisma',
       'NextAuth',
       'Tailwindcss',
       'shadcn/ui',
       'Recharts',
+      'OpenAI',
+      'Tanstack',
+      'Upstash Redis',
+      'Zod',
     ],
     role: 'Full-stack product engineering',
     year: '2026',
     status: 'Live',
     featured: true,
     caseStudy:
-      'Built a multi-store restaurant management surface with role-based access, daily reporting, analytics views, and operational workflows that feel fast enough for repeat use.',
+      'Graphify mapped the local codebase at 2,040 nodes, 2,440 links, and 54 communities, which matches the real shape of the product: a full-stack operating platform connecting stores, orders, invoices, recipes, vendor prices, ingredients, ratings, P&L, AI tools, and monitoring into one owner-ready workflow.',
     highlights: [
-      'Owner and manager flows with protected routes',
-      'Daily reports, analytics, and Yelp-oriented business context',
-      'Responsive dashboard UI tuned for scanning and repeated action',
+      'Owner and manager workflows with account/store scoping, invites, protected routes, desktop dashboards, and mobile routes',
+      'Otter, Yelp, Microsoft Graph invoice, R2 PDF, and cron sync pipelines tracked through JobRun monitoring',
+      'COGS engine connects orders, recipes, modifiers, packaging, canonical ingredients, invoice line matching, and P&L reporting',
+      'Owner-scoped AI chat routes questions through tools for sales, P&L, invoices, refunds, menu margin, recipes, ingredients, and historical context',
+    ],
+    architecture: [
+      {
+        title: 'Access + Stores',
+        summary:
+          'Account, user, and store scoping keep owner and manager workflows separated while preserving multi-store oversight.',
+        evidence: [
+          'owner/manager roles',
+          'invites',
+          'hasOwnerAccess',
+          'store-scoped actions',
+        ],
+      },
+      {
+        title: 'Sync + Evidence',
+        summary:
+          'Operational evidence flows in through delivery, review, invoice, and file pipelines, then lands in monitored jobs instead of loose exports.',
+        evidence: [
+          'Otter orders/metrics',
+          'Yelp ratings',
+          'invoice PDFs',
+          'withJobRun',
+        ],
+      },
+      {
+        title: 'COGS + P&L',
+        summary:
+          'Recipe costing rolls through canonical ingredients, modifiers, packaging, daily COGS rows, and GL-style profit views.',
+        evidence: [
+          'recipe costs',
+          'canonical costs',
+          'modifier mapping',
+          'daily materialization',
+        ],
+      },
+      {
+        title: 'AI Ops Layer',
+        summary:
+          'The owner chat uses scoped tools and embeddings to answer operational questions without trusting model-provided ownership or store ids.',
+        evidence: [
+          'tool registry',
+          'embeddings',
+          'P&L history',
+          'AI usage tracking',
+        ],
+      },
+      {
+        title: 'Monitoring + Mobile',
+        summary:
+          'Health views track database, cache, auth, syncs, errors, and AI cost while mobile routes keep daily operations reachable on the floor.',
+        evidence: [
+          'system status',
+          'live presence',
+          'mobile P&L',
+          'mobile invoices/orders',
+        ],
+      },
     ],
   },
   {
     id: 'ryddo-catalyst',
     name: 'RYDDO Catalyst',
-    description: 'Headless commerce experience built on BigCommerce Catalyst.',
+    description:
+      "BigCommerce Catalyst storefront customized for RYDDO's electric mobility catalog, PDPs, dealers, content, and accessory add-ons.",
     githubUrl: 'https://github.com/ryddo-llc/ryddo-catalyst',
     linkUrl: 'https://ryddo-catalyst.vercel.app/super73-rx?119=128&128=157',
     tech: [
@@ -58,17 +130,21 @@ const Projects: Project[] = [
       'GraphQL',
       'BigCommerce',
       'Tailwindcss',
+      'Algolia',
+      'next-intl',
+      'Radix UI',
+      'Embla',
     ],
     role: 'Commerce front-end engineering',
     year: '2026',
     status: 'Live',
     featured: true,
     caseStudy:
-      'Worked with a composable commerce stack to shape fast product detail pages, storefront routing, and a production-ready buying surface for a real brand catalog.',
+      'Customized BigCommerce Catalyst into a RYDDO storefront with GraphQL Storefront API data, option-aware product detail pages, custom-field product transformers, cart/session flows, Algolia search, analytics, dealer and content routes, and branded accessory recommendations.',
     highlights: [
-      'BigCommerce Catalyst storefront foundation',
-      'Dynamic product routes and option-aware product pages',
-      'Performance-minded Next.js deployment on Vercel',
+      'Built on BigCommerce Catalyst with gql.tada GraphQL, Next.js App Router, next-intl, analytics, and cart/session infrastructure',
+      'Product pages transform custom fields, options, images, inventory, pricing, reviews, and schema data into branded PDP sections',
+      'RYDDO-specific brand surface includes dealers, about/blog content, payment options, performance visuals, accessory carousel, and product modal interactions',
     ],
   },
   {

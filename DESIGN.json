@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-05T11:57:06-07:00",
+  "title": "Design System: Vanyan OS Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Electric Desktop Accent",
+        "canonical": "var(--accent)",
+        "tonalRamp": [
+          "oklch(0.18 0.12 var(--accent-h))",
+          "oklch(0.28 0.16 var(--accent-h))",
+          "oklch(0.38 0.19 var(--accent-h))",
+          "oklch(0.50 0.22 var(--accent-h))",
+          "oklch(0.62 0.22 var(--accent-h))",
+          "oklch(0.74 0.16 var(--accent-h))",
+          "oklch(0.86 0.09 var(--accent-h))",
+          "oklch(0.95 0.04 var(--accent-h))"
+        ]
+      },
+      "state-warm": {
+        "role": "tertiary",
+        "displayName": "Warm Signal Coral",
+        "canonical": "var(--state-warm)",
+        "tonalRamp": [
+          "oklch(0.18 0.08 30)",
+          "oklch(0.28 0.11 30)",
+          "oklch(0.40 0.14 30)",
+          "oklch(0.54 0.16 30)",
+          "oklch(0.66 0.16 30)",
+          "oklch(0.76 0.12 30)",
+          "oklch(0.88 0.07 30)",
+          "oklch(0.96 0.03 30)"
+        ]
+      },
+      "bg-1-light": {
+        "role": "neutral",
+        "displayName": "Panel Surface",
+        "canonical": "var(--bg-1)",
+        "tonalRamp": [
+          "oklch(0.16 0.02 var(--accent-h))",
+          "oklch(0.24 0.02 var(--accent-h))",
+          "oklch(0.34 0.018 var(--accent-h))",
+          "oklch(0.50 0.014 var(--accent-h))",
+          "oklch(0.68 0.012 var(--accent-h))",
+          "oklch(0.82 0.01 var(--accent-h))",
+          "oklch(0.93 0.009 var(--accent-h))",
+          "oklch(0.965 0.008 var(--accent-h))"
+        ]
+      },
+      "mica-light": {
+        "role": "neutral",
+        "displayName": "Readable Mica",
+        "canonical": "var(--mica)",
+        "tonalRamp": [
+          "oklch(0.18 0.02 var(--accent-h) / 0.94)",
+          "oklch(0.28 0.02 var(--accent-h) / 0.94)",
+          "oklch(0.40 0.018 var(--accent-h) / 0.94)",
+          "oklch(0.56 0.014 var(--accent-h) / 0.94)",
+          "oklch(0.72 0.01 var(--accent-h) / 0.94)",
+          "oklch(0.86 0.008 var(--accent-h) / 0.94)",
+          "oklch(0.94 0.006 var(--accent-h) / 0.94)",
+          "oklch(0.99 0.005 var(--accent-h) / 0.94)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Rare large moments such as lock or project detail emphasis."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Major app headings and project detail titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Window titles, command labels, project names, and dense list titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Readable app content and project descriptions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Column headers, metadata, status bars, and OS chrome labels."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Terminal, Monaco, commands, and code-like portfolio snippets."
+      }
+    },
+    "shadows": [
+      {
+        "name": "window",
+        "value": "var(--os-shadow-window)",
+        "purpose": "Focused windows, Start menu, command palette, and modal-like OS surfaces."
+      },
+      {
+        "name": "floating",
+        "value": "var(--os-shadow-floating)",
+        "purpose": "Taskbar, inactive windows, lightweight panels, and secondary floating UI."
+      },
+      {
+        "name": "icon-drop",
+        "value": "drop-shadow(0 10px 18px rgba(0,0,0,0.24))",
+        "purpose": "Desktop and launcher icons only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "os-expo-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Default expressive easing for windows, command palette, sticky note, and project rows."
+      },
+      {
+        "name": "window-open",
+        "value": "320ms transform+opacity",
+        "purpose": "Scale and translate windows from their launch origin."
+      },
+      {
+        "name": "window-close",
+        "value": "220ms transform+opacity",
+        "purpose": "Close animation that feels quick and reversible."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0.001ms duration under prefers-reduced-motion",
+        "purpose": "Preserve access while removing motion for sensitive users."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Ghost Icon Button",
+      "kind": "button",
+      "refersTo": "icon-button",
+      "description": "The default taskbar and titlebar control: quiet at rest, clearer on hover, accent when active.",
+      "html": "<button class=\"ds-icon-button\" type=\"button\" aria-label=\"Open\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5v14\"/></svg></button>",
+      "css": ".ds-icon-button { width: 32px; height: 32px; border: 0; border-radius: var(--radius-chrome, 6px); display: inline-flex; align-items: center; justify-content: center; color: var(--fg-1); background: transparent; transition: color 160ms ease-out, background-color 160ms ease-out, transform 200ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-icon-button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; } .ds-icon-button:hover { color: var(--accent); background: oklch(0.18 0.02 var(--accent-h) / 0.10); } .ds-icon-button:active { transform: translateY(1px); } .ds-icon-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "A compact solid search field for Start menu and command palette inputs.",
+      "html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m21 21-4.3-4.3M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z\"/></svg><input placeholder=\"Search apps\" /></label>",
+      "css": ".ds-search { min-height: 38px; border: 1px solid var(--hairline); border-radius: var(--radius-chrome, 6px); background: var(--bg-1); color: var(--fg-0); display: flex; align-items: center; gap: 8px; padding: 8px 12px; } .ds-search svg { width: 16px; height: 16px; fill: none; stroke: var(--fg-2); stroke-width: 2; stroke-linecap: round; } .ds-search input { min-width: 0; flex: 1; border: 0; outline: 0; background: transparent; color: var(--fg-0); font: 13px/1.4 var(--font-inter), ui-sans-serif, system-ui, sans-serif; } .ds-search input::placeholder { color: var(--fg-2); } .ds-search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }"
+    },
+    {
+      "name": "Window Frame",
+      "kind": "card",
+      "refersTo": "window-frame",
+      "description": "The signature portfolio container: a readable OS window with titlebar, controls, border, and shadow.",
+      "html": "<section class=\"ds-window\"><header><span class=\"ds-window-title\">Projects</span><span class=\"ds-controls\"><button></button><button></button><button></button></span></header><div class=\"ds-window-body\">Window content</div></section>",
+      "css": ".ds-window { width: 360px; overflow: hidden; border: 1px solid var(--hairline); border-radius: var(--radius-window, 8px); background: var(--mica); color: var(--fg-0); box-shadow: var(--os-shadow-window); backdrop-filter: blur(40px) saturate(160%); } .ds-window header { height: 36px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-left: 12px; border-bottom: 1px solid var(--hairline); } .ds-window-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 600 13px/1.2 var(--font-inter), ui-sans-serif, system-ui, sans-serif; } .ds-controls { display: flex; height: 100%; } .ds-controls button { width: 40px; border: 0; background: transparent; color: var(--fg-1); } .ds-controls button:hover { background: oklch(0.18 0.02 var(--accent-h) / 0.10); } .ds-window-body { padding: 16px; font: 13px/1.5 var(--font-inter), ui-sans-serif, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Taskbar",
+      "kind": "nav",
+      "refersTo": "taskbar",
+      "description": "A centered, compact launcher strip with mica material and small active indicators.",
+      "html": "<nav class=\"ds-taskbar\" aria-label=\"Taskbar\"><button class=\"ds-taskbar-item ds-active\">V</button><button class=\"ds-taskbar-item\">T</button><button class=\"ds-taskbar-item\">P</button><span class=\"ds-taskbar-spacer\"></span><button class=\"ds-taskbar-item\">K</button></nav>",
+      "css": ".ds-taskbar { height: 48px; max-width: 760px; display: flex; align-items: center; gap: 4px; padding: 0 12px; border: 1px solid var(--hairline); border-radius: var(--radius-window, 8px); background: var(--mica); color: var(--fg-1); box-shadow: var(--os-shadow-floating); backdrop-filter: blur(40px) saturate(160%); } .ds-taskbar-item { position: relative; width: 32px; height: 32px; border: 0; border-radius: var(--radius-chrome, 6px); color: inherit; background: transparent; font: 700 12px/1 var(--font-inter), ui-sans-serif, system-ui, sans-serif; transition: color 160ms ease-out, background-color 160ms ease-out; } .ds-taskbar-item:hover { color: var(--accent); background: oklch(0.18 0.02 var(--accent-h) / 0.10); } .ds-taskbar-item.ds-active { color: var(--accent); background: var(--accent-glow); } .ds-taskbar-item.ds-active::after { content: ''; position: absolute; left: 50%; bottom: 1px; width: 12px; height: 2px; transform: translateX(-50%); border-radius: 999px; background: var(--accent); } .ds-taskbar-spacer { flex: 1; }"
+    },
+    {
+      "name": "Project Row",
+      "kind": "card",
+      "refersTo": "project-row",
+      "description": "A dense File Explorer row with thumbnail, metadata, tech chips, and direct actions.",
+      "html": "<article class=\"ds-project-row\"><div class=\"ds-thumb\"></div><div class=\"ds-project-copy\"><strong>RYDDO Catalyst</strong><span>Commerce platform and product workflow.</span></div><span class=\"ds-chip\">Next</span><span class=\"ds-chip\">Postgres</span><button>Details</button></article>",
+      "css": ".ds-project-row { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto auto auto; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--hairline); background: transparent; color: var(--fg-0); transition: background-color 160ms ease-out; } .ds-project-row:hover { background: oklch(0.18 0.02 var(--accent-h) / 0.05); } .ds-thumb { width: 48px; height: 40px; border: 1px solid var(--hairline); border-radius: var(--radius-chrome, 6px); background: linear-gradient(135deg, var(--accent-glow), var(--bg-1)); } .ds-project-copy { min-width: 0; display: grid; gap: 2px; } .ds-project-copy strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 600 13px/1.3 var(--font-inter), ui-sans-serif, system-ui, sans-serif; } .ds-project-copy span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--fg-2); font: 12px/1.3 var(--font-inter), ui-sans-serif, system-ui, sans-serif; } .ds-chip { border-radius: var(--radius-chrome, 6px); background: var(--bg-1); color: var(--fg-1); padding: 4px 6px; font: 600 10px/1 var(--font-inter), ui-sans-serif, system-ui, sans-serif; } .ds-project-row button { border: 0; border-radius: var(--radius-chrome, 6px); background: transparent; color: var(--fg-1); padding: 6px 8px; font: 600 12px/1 var(--font-inter), ui-sans-serif, system-ui, sans-serif; } .ds-project-row button:hover { color: var(--accent); background: var(--accent-glow); }"
+    },
+    {
+      "name": "Command Palette Result",
+      "kind": "nav",
+      "refersTo": "palette-result",
+      "description": "Keyboard-first launcher row with a small monogram, label, detail, and active accent wash.",
+      "html": "<button class=\"ds-palette-result ds-active\" type=\"button\"><span>R</span><strong>Inspect RYDDO Catalyst</strong><small>Project details and links</small></button>",
+      "css": ".ds-palette-result { width: 100%; border: 0; border-radius: var(--radius-chrome, 6px); display: grid; grid-template-columns: 32px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 12px; row-gap: 2px; padding: 10px 12px; text-align: left; color: var(--fg-1); background: transparent; transition: color 160ms ease-out, background-color 160ms ease-out, transform 200ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-palette-result span { grid-row: 1 / 3; width: 32px; height: 32px; border-radius: var(--radius-chrome, 6px); display: inline-flex; align-items: center; justify-content: center; background: var(--bg-0); color: var(--accent); font: 700 12px/1 var(--font-inter), ui-sans-serif, system-ui, sans-serif; } .ds-palette-result strong { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--fg-0); font: 700 13px/1.25 var(--font-inter), ui-sans-serif, system-ui, sans-serif; } .ds-palette-result small { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--fg-2); font: 12px/1.25 var(--font-inter), ui-sans-serif, system-ui, sans-serif; } .ds-palette-result:hover, .ds-palette-result.ds-active { background: var(--accent-glow); color: var(--fg-0); } .ds-palette-result:active { transform: translateY(1px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Recruiter Desktop",
+    "overview": "This portfolio behaves like a polished personal operating system. The surface should feel immediately usable, with familiar desktop affordances: taskbar, windows, Start menu, command palette, terminal, Chrome preview, and a VS Code README. The interaction itself is the proof of craft, so every playful detail must also make it easier to inspect Vardan's work.\n\nThe mood is polished, inventive, and technically fluent. Surfaces are compact, readable, and tool-like; motion is present but never theatrical. The OS metaphor can wink, but it cannot hide projects, resume, contact, GitHub, or LinkedIn.\n\nThe system rejects generic resume templates, static one-page portfolio sameness, SaaS-style hero metrics, novelty desktop effects that slow down basic navigation, and visuals that obscure project evidence.",
+    "keyCharacteristics": [
+      "Familiar desktop shell with portfolio-specific apps.",
+      "Hard, readable panels over atmospheric wallpaper.",
+      "OKLCH theming with accent-swappable neutrals.",
+      "Compact typography, strong focus states, and dense scan paths.",
+      "Motion built from opacity and transform, not layout shifts."
+    ],
+    "rules": [
+      {
+        "name": "The Evidence First Rule",
+        "body": "Accent color can guide attention, but screenshots, project details, and working links must carry more visual weight than decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Solid Mica Rule",
+        "body": "Mica surfaces must stay readable at rest. If wallpaper texture competes with text, increase opacity or switch to `bg-1`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tool Text Rule",
+        "body": "Window chrome stays compact. Do not use hero-scale type inside taskbars, menus, file rows, cards, or sidebars.",
+        "section": "typography"
+      },
+      {
+        "name": "The Readme Comfort Rule",
+        "body": "Code and README surfaces need larger text than decorative OS labels. Monaco and terminal content should sit around 14px with generous line height.",
+        "section": "typography"
+      },
+      {
+        "name": "The Stack Only Rule",
+        "body": "Shadows explain stacking. Do not use heavy shadow as decoration on every panel.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Border Before Shadow Rule",
+        "body": "Dense app regions should use hairlines and solid surfaces before adding more elevation.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep projects, resume, contact, GitHub, and LinkedIn one or two actions away from the desktop.",
+      "Do use solid `bg-1`, `bg-0`, or high-opacity mica when text sits over wallpaper.",
+      "Do preserve keyboard access: Enter and Space for icons, Ctrl+K for command palette, Escape for overlays, and visible focus rings.",
+      "Do animate with opacity, transform, and CSS variables using `cubic-bezier(0.22, 1, 0.36, 1)`.",
+      "Do keep app chrome compact, with 11px to 13px labels and 32px icon controls.",
+      "Do use the accent as a scarce signal for selected, focused, active, or unlocked states."
+    ],
+    "donts": [
+      "Don't make it look like generic resume templates.",
+      "Don't return to static one-page portfolio sameness.",
+      "Don't use SaaS-style hero metrics or big stats as the main proof of skill.",
+      "Don't add novelty desktop effects that slow down basic navigation.",
+      "Don't let visuals obscure project evidence.",
+      "Don't rely on low-opacity panels over busy wallpaper when the user is trying to read.",
+      "Don't use gradient text, decorative side-stripe borders, nested cards, or glassmorphism as the default answer.",
+      "Don't add server-side previews, proxies, API routes, or remote browser infrastructure for static portfolio effects."
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import projects from '@/data';
+import projects, { type ProjectArchitectureItem } from '@/data';
 import { cn } from '@/lib/cn';
 import { ProjectArtwork } from '../ProjectArtwork';
 import { ExternalIcon, FolderIcon } from '../icons';
@@ -93,6 +93,13 @@ export function ProjectDetailsWindowContent() {
                 </ul>
               </section>
 
+              {project.architecture?.length ? (
+                <ArchitectureMap
+                  items={project.architecture}
+                  delayBase={project.highlights.length}
+                />
+              ) : null}
+
               <section>
                 <h2 className="mb-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-fg-2">
                   Stack
@@ -140,6 +147,51 @@ export function ProjectDetailsWindowContent() {
           </div>
         </main>
       </div>
+    </section>
+  );
+}
+
+function ArchitectureMap({
+  items,
+  delayBase,
+}: {
+  items: ProjectArchitectureItem[];
+  delayBase: number;
+}) {
+  return (
+    <section>
+      <h2 className="mb-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-fg-2">
+        Architecture Map
+      </h2>
+      <ul className="grid gap-2">
+        {items.map((item, index) => (
+          <li
+            key={item.title}
+            className="project-detail-row rounded-chrome border border-hairline/60 bg-bg-1/95 px-3 py-3"
+            style={{ animationDelay: `${(delayBase + index) * 70}ms` }}
+          >
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-accent" />
+              <h3 className="text-[13px] font-semibold text-fg-0">
+                {item.title}
+              </h3>
+            </div>
+            <p className="mt-2 max-w-[72ch] text-[13px] leading-5 text-fg-1">
+              {item.summary}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {item.evidence.map((evidence) => (
+                <span
+                  key={evidence}
+                  className="rounded-full border border-hairline/60 bg-bg-0 px-2 py-0.5 text-[11px] font-medium text-fg-2"
+                >
+                  {evidence}
+                </span>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
