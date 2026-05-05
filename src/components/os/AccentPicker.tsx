@@ -4,17 +4,21 @@ import { usePreferences } from './state/preferences';
 import type { AccentName } from './state/types';
 import { cn } from '@/lib/cn';
 
-const ACCENTS: { name: AccentName; hue: number; label: string }[] = [
+const ACCENTS: { name: AccentName; hue: number; label: string; locked?: true }[] = [
   { name: 'indigo', hue: 290, label: 'Indigo' },
   { name: 'cyan', hue: 215, label: 'Cyan' },
   { name: 'rose', hue: 10, label: 'Rose' },
+  { name: 'operator', hue: 142, label: 'Operator', locked: true },
 ];
 
 export function AccentPicker() {
-  const { accent, setAccent } = usePreferences();
+  const { accent, operatorUnlocked, setAccent } = usePreferences();
+  const visibleAccents = ACCENTS.filter(
+    (a) => !a.locked || operatorUnlocked || accent === a.name,
+  );
   return (
     <div role="radiogroup" aria-label="Accent color" className="flex gap-1">
-      {ACCENTS.map((a) => {
+      {visibleAccents.map((a) => {
         const active = a.name === accent;
         return (
           <button

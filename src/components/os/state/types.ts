@@ -4,6 +4,7 @@ export const WINDOW_IDS = [
   'chrome',
   'about',
   'projects',
+  'projectDetails',
   'tech',
   'resume',
   'contact',
@@ -29,4 +30,4 @@ export type WindowState = {
 export type SessionPhase = 'booting' | 'locked' | 'unlocked';
 
 export type ThemeMode = 'dark' | 'light' | 'system';
-export type AccentName = 'indigo' | 'cyan' | 'rose';
+export type AccentName = 'indigo' | 'cyan' | 'rose' | 'operator';

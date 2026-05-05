@@ -74,6 +74,15 @@ export const WINDOW_META: Record<WindowId, WindowMeta> = {
     titleBarIcon: <FolderIcon className="h-4 w-4" />,
     size: 'xl',
   },
+  projectDetails: {
+    id: 'projectDetails',
+    title: 'Project Properties',
+    desktopLabel: 'Project Properties',
+    desktopIcon: <ProjectsAppIcon className="h-12 w-12" />,
+    launcherIcon: <ProjectsAppIcon className="h-10 w-10" />,
+    titleBarIcon: <FolderIcon className="h-4 w-4" />,
+    size: 'lg',
+  },
   tech: {
     id: 'tech',
     title: 'Installed Apps — Settings',

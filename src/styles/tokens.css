@@ -78,6 +78,13 @@
 :root[data-accent='rose'] {
   --accent-h: 10;
 }
+:root[data-accent='operator'] {
+  --accent-h: 142;
+  --accent: oklch(0.72 0.2 var(--accent-h));
+  --accent-strong: oklch(0.62 0.22 var(--accent-h));
+  --accent-soft: oklch(0.82 0.14 var(--accent-h));
+  --accent-glow: oklch(0.72 0.2 var(--accent-h) / 0.38);
+}
 
 /* Solid mica fallback for browsers without backdrop-filter */
 @supports not (backdrop-filter: blur(0)) {

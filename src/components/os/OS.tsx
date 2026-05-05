@@ -2,7 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 import { PreferencesProvider } from './state/preferences';
+import { AchievementProvider } from './state/achievements';
 import { BrowserProvider } from './state/browser';
+import { ProjectDetailsProvider } from './state/project-details';
 import { SessionProvider, useSession } from './state/session';
 import { WindowManagerProvider, useWindowManager } from './state/window-manager';
 import { Desktop } from './Desktop';
@@ -15,7 +17,11 @@ export function OS() {
       <SessionProvider>
         <WindowManagerProvider>
           <BrowserProvider>
-            <SessionShell />
+            <ProjectDetailsProvider>
+              <AchievementProvider>
+                <SessionShell />
+              </AchievementProvider>
+            </ProjectDetailsProvider>
           </BrowserProvider>
         </WindowManagerProvider>
       </SessionProvider>

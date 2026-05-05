@@ -5,6 +5,8 @@ import { DesktopIcon } from './DesktopIcon';
 import { WindowLayer } from './WindowLayer';
 import { Taskbar } from './Taskbar';
 import { DeepLinkOpener } from './DeepLinkOpener';
+import { CommandPalette } from './CommandPalette';
+import { StickyNote } from './StickyNote';
 import { useBrowser } from './state/browser';
 import { useWindowManager } from './state/window-manager';
 import { DESKTOP_SHORTCUTS, runShortcut } from './shortcuts';
@@ -35,10 +37,12 @@ export function Desktop() {
         })}
       </section>
 
+      <StickyNote />
       <WindowLayer />
 
       <Taskbar />
       <DeepLinkOpener />
+      <CommandPalette />
     </main>
   );
 }

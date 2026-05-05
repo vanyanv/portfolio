@@ -105,6 +105,16 @@ function BrowserButton({
 function GitHubPreview() {
   const repos = [
     {
+      name: 'restaurant-dashboard',
+      description: "Chris n Eddy's operations dashboard.",
+      stack: 'Next.js, TypeScript, Prisma, Recharts',
+    },
+    {
+      name: 'ryddo-catalyst',
+      description: 'BigCommerce Catalyst storefront work.',
+      stack: 'Next.js, TypeScript, GraphQL, BigCommerce',
+    },
+    {
       name: 'MicrObserv',
       description: 'Observability dashboard for microservices.',
       stack: 'React, Electron, Node, Postgres',

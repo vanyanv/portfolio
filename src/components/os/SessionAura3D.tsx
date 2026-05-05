@@ -4,6 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { usePreferences } from './state/preferences';
+import type { AccentName } from './state/types';
 
 type SessionAuraVariant = 'boot' | 'lock';
 
@@ -17,10 +18,11 @@ type Palette = {
   mist: THREE.Color;
 };
 
-const accentHues = {
+const accentHues: Record<AccentName, number> = {
   indigo: 0.78,
   cyan: 0.56,
   rose: 0.02,
+  operator: 0.39,
 };
 
 export function SessionAura3D({ variant }: Props) {

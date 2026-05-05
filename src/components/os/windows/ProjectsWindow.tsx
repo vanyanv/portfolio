@@ -1,6 +1,10 @@
-import Image from 'next/image';
+'use client';
+
 import projects from '@/data';
 import { ExternalIcon, FolderIcon } from '../icons';
+import { ProjectArtwork } from '../ProjectArtwork';
+import { useAchievements } from '../state/achievements';
+import { useProjectDetails } from '../state/project-details';
 
 const ICON_FILE: Record<string, string> = {
   React: 'React',
@@ -27,6 +31,18 @@ function techIcon(tech: string) {
 }
 
 export function ProjectsWindowContent() {
+  const { openProjectDetails } = useProjectDetails();
+  const { triggerAchievement } = useAchievements();
+
+  const inspectProject = (id: string) => {
+    openProjectDetails(id);
+    triggerAchievement(
+      'inspected-project',
+      'Inspector mode',
+      'You opened a project properties sheet instead of just skimming links.',
+    );
+  };
+
   return (
     <div className="flex h-full flex-col">
       {/* Faux File Explorer toolbar */}
@@ -51,18 +67,13 @@ export function ProjectsWindowContent() {
       <ul className="flex-1 overflow-y-auto">
         {projects.map((project) => (
           <li
-            key={project.name}
-            className="group grid grid-cols-[2.2fr_2.5fr_2fr_auto] items-center gap-3 px-4 py-3 border-b border-hairline/30 hover:bg-fg-0/5 transition-colors"
+            key={project.id}
+            className="project-list-row group grid grid-cols-[2.2fr_2.5fr_2fr_auto] items-center gap-3 px-4 py-3 border-b border-hairline/30 hover:bg-fg-0/5 transition-colors"
+            onDoubleClick={() => inspectProject(project.id)}
           >
             <div className="flex items-center gap-3 min-w-0">
               <div className="relative h-10 w-12 shrink-0 overflow-hidden rounded-chrome border border-hairline/60 bg-bg-1">
-                <Image
-                  src={project.imageUrl}
-                  alt=""
-                  fill
-                  sizes="48px"
-                  className="object-cover"
-                />
+                <ProjectArtwork project={project} />
               </div>
               <div className="min-w-0">
                 <p className="truncate text-[13px] font-medium text-fg-0">
@@ -83,13 +94,20 @@ export function ProjectsWindowContent() {
                   title={t}
                   className="flex h-6 w-6 items-center justify-center rounded bg-bg-1/40"
                 >
-                  <Image
-                    src={techIcon(t)}
-                    alt={t}
-                    width={14}
-                    height={14}
-                    className="opacity-80"
-                  />
+                  {ICON_FILE[t] ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={techIcon(t)}
+                      alt={t}
+                      width={14}
+                      height={14}
+                      className="opacity-80"
+                    />
+                  ) : (
+                    <span className="px-1 text-[9px] font-bold uppercase text-fg-1">
+                      {t.slice(0, 2)}
+                    </span>
+                  )}
                 </span>
               ))}
               {project.tech.length > 6 && (
@@ -100,6 +118,13 @@ export function ProjectsWindowContent() {
             </div>
 
             <div className="flex items-center gap-1 justify-end">
+              <button
+                type="button"
+                onClick={() => inspectProject(project.id)}
+                className="rounded px-2 py-1 text-[12px] font-medium text-fg-1 transition-colors hover:bg-accent/15 hover:text-accent"
+              >
+                Details
+              </button>
               <ProjectLink href={project.githubUrl} label="Source">
                 Source
               </ProjectLink>

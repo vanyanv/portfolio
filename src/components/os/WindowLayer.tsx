@@ -47,6 +47,13 @@ const WINDOW_CONTENTS: Record<WindowId, WindowContentComponent> = {
       ),
     { loading: windowContentLoading('Projects'), ssr: false },
   ),
+  projectDetails: dynamic(
+    () =>
+      import('./windows/ProjectDetailsWindow').then(
+        (mod) => mod.ProjectDetailsWindowContent,
+      ),
+    { loading: windowContentLoading('Project Properties'), ssr: false },
+  ),
   tech: dynamic(
     () => import('./windows/TechWindow').then((mod) => mod.TechWindowContent),
     { loading: windowContentLoading('Installed Apps'), ssr: false },
